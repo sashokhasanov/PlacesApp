@@ -31,18 +31,14 @@ class PlacesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath)
 
-        var configuration = cell.defaultContentConfiguration()
-        configuration.text = restaurantNames[indexPath.row]
-        configuration.image = UIImage(named: restaurantNames[indexPath.row])
-        configuration.imageProperties.cornerRadius = cell.frame.size.height / 2
+        if let placeCell = cell as? PlaceCell {
+            placeCell.nameLabel.text = restaurantNames[indexPath.row]
+            
+            placeCell.placeImage.image = UIImage(named: restaurantNames[indexPath.row])
+            placeCell.placeImage.layer.cornerRadius = placeCell.placeImage.frame.height / 2
+            placeCell.placeImage.clipsToBounds = true
+        }
         
-        cell.contentConfiguration = configuration
-        
-//        cell.textLabel?.text = restaurantNames[indexPath.row]
-//        cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
-//        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2
-//        cell.imageView?.clipsToBounds = true
-
         return cell
     }
     
