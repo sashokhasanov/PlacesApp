@@ -9,43 +9,35 @@ import UIKit
 
 class PlacesTableViewController: UITableViewController {
 
-    let restaurantNames = [
-        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
-        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
-        "Speak Easy", "Morris Pub", "Вкусные истории",
-        "Классик", "Love&Life", "Шок", "Бочка"
-    ]
+    let places = Place.getPlaces()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return places.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath)
 
         if let placeCell = cell as? PlaceCell {
-            placeCell.nameLabel.text = restaurantNames[indexPath.row]
             
-            placeCell.placeImage.image = UIImage(named: restaurantNames[indexPath.row])
+            
+            placeCell.nameLabel.text = places[indexPath.row].name
+            placeCell.locationLabel.text = places[indexPath.row].location
+            placeCell.typeLabel.text = places[indexPath.row].type
+            placeCell.placeImage.image = UIImage(named: places[indexPath.row].image)
+            
             placeCell.placeImage.layer.cornerRadius = placeCell.placeImage.frame.height / 2
             placeCell.placeImage.clipsToBounds = true
         }
         
         return cell
-    }
-    
-    // MARK: - Table view delegate
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
     }
 
     /*
@@ -57,5 +49,7 @@ class PlacesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
 
 }

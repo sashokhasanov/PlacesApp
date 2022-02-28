@@ -14,6 +14,7 @@
 		2DAB3F7A27C909B700CAD4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3F7827C909B700CAD4E2 /* LaunchScreen.storyboard */; };
 		2DAB3F8227C90C7400CAD4E2 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */; };
 		2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */; };
+		2DAB3FA627CCFC2200CAD4E2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA527CCFC2200CAD4E2 /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2DAB3F7B27C909B700CAD4E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		2DAB3FA527CCFC2200CAD4E2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */,
 				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
+				2DAB3FA527CCFC2200CAD4E2 /* Place.swift */,
 				2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */,
 				2DAB3F7327C909B100CAD4E2 /* Main.storyboard */,
 				2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */,
@@ -145,6 +148,7 @@
 				2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */,
 				2DAB3F8227C90C7400CAD4E2 /* PlacesTableViewController.swift in Sources */,
 				2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */,
+				2DAB3FA627CCFC2200CAD4E2 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
