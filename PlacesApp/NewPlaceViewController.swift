@@ -9,10 +9,24 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
 
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
+    @IBOutlet weak var placeName: UITextField!
+    @IBOutlet weak var placeLocation: UITextField!
+    @IBOutlet weak var placeType: UITextField!
+    
+    var imagePicked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        saveButton.isEnabled = false;
+        
+        placeName.addTarget(self, action: #selector(placeNameChanged), for: .editingChanged)
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        dismiss(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,6 +58,14 @@ class NewPlaceViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
     }
+    
+    func getNewPlace() -> PlaceModel {
+        return PlaceModel(name: placeName.text ?? "",
+                          location: placeLocation.text,
+                          type: placeType.text,
+                          image: imagePicked ? placeImage.image : UIImage(named: "imagePlaceholder"),
+                          predefinedImage: nil)
+    }
 }
 
 // MARK: - Text field delegate
@@ -52,6 +74,10 @@ extension NewPlaceViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @objc private func placeNameChanged() {
+        saveButton.isEnabled = !(placeName.text?.isEmpty ?? true)
     }
 }
 
@@ -75,6 +101,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         placeImage.image = info[.editedImage] as? UIImage
         placeImage.contentMode = .scaleAspectFill
         placeImage.clipsToBounds = true
+        imagePicked = true
         dismiss(animated: true)
     }
     

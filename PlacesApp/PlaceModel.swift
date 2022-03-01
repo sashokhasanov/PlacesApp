@@ -1,19 +1,19 @@
 //
-//  Place.swift
+//  PlaceModel.swift
 //  PlacesApp
 //
 //  Created by Сашок on 28.02.2022.
 //
 
-import Foundation
+import UIKit
 
-struct Place {
+struct PlaceModel {
     let name: String
-    let location: String
-    let type: String
+    let location: String?
+    let type: String?
     
-    let image: String
-    
+    let image: UIImage?
+    let predefinedImage: String?
     
     static let restaurantNames = [
         "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
@@ -22,11 +22,11 @@ struct Place {
         "Классик", "Love&Life", "Шок", "Бочка"
     ]
     
-    static func getPlaces() -> [Place] {
-        var places = [Place]()
+    static func getPlaces() -> [PlaceModel] {
+        var places = [PlaceModel]()
         
         for name in restaurantNames {
-            places.append(Place(name: name, location: "Москва", type: "Ресторан", image: name))
+            places.append(PlaceModel(name: name, location: "Москва", type: "Ресторан", image: nil, predefinedImage: name))
         }
         
         return places
