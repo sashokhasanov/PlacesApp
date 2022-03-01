@@ -27,11 +27,13 @@ class PlacesTableViewController: UITableViewController {
 
         if let placeCell = cell as? PlaceCell {
             
+            let place = places[indexPath.row]
             
-            placeCell.nameLabel.text = places[indexPath.row].name
-            placeCell.locationLabel.text = places[indexPath.row].location
-            placeCell.typeLabel.text = places[indexPath.row].type
-            placeCell.placeImage.image = UIImage(named: places[indexPath.row].predefinedImage!)
+            placeCell.nameLabel.text = place.name
+            placeCell.locationLabel.text = place.location
+            placeCell.typeLabel.text = place.type
+            placeCell.placeImage.image =
+                place.predefinedImage == nil ? place.image : UIImage(named: place.predefinedImage!)
             
             placeCell.placeImage.layer.cornerRadius = placeCell.placeImage.frame.height / 2
             placeCell.placeImage.clipsToBounds = true
