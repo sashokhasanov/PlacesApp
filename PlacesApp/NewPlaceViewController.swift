@@ -19,24 +19,30 @@ class NewPlaceViewController: UITableViewController {
         if indexPath.row == 0 {
             let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            let camera = UIAlertAction(title: "Make photo", style: .default) { _ in
+            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
                 self.chooseImagePicker(source: .camera)
             }
+            camera.setValue(UIImage(named: "camera"), forKey: "image")
             
-            let gallery = UIAlertAction(title: "Select from gallery", style: .default) { _ in
+            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
                 self.chooseImagePicker(source: .photoLibrary)
             }
+            photo.setValue(UIImage(named: "photo"), forKey: "image")
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             
             actions.addAction(camera)
-            actions.addAction(gallery)
+            actions.addAction(photo)
             actions.addAction(cancel)
             
             present(actions, animated: true)
         } else {
             view.endEditing(true)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        0
     }
 }
 
@@ -62,8 +68,8 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
             
             present(imagePicker, animated: true)
         }
-        
     }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         placeImage.image = info[.editedImage] as? UIImage
