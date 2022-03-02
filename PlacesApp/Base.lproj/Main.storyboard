@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3xt-oJ-IJ1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,6 +67,7 @@
                                     <outlet property="nameLabel" destination="Y9X-Rd-EkS" id="daT-ig-BFZ"/>
                                     <outlet property="placeImage" destination="dCY-vQ-CIS" id="2mg-jc-h3A"/>
                                     <outlet property="typeLabel" destination="dtc-pd-fnS" id="6fE-NK-xbi"/>
+                                    <segue destination="PXK-gq-ncq" kind="show" identifier="showDetails" id="5io-eY-ost"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -76,7 +76,7 @@
                             <outlet property="delegate" destination="Gi5-2q-8jx" id="dZ8-HW-r5v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My places" id="f5R-qM-GSp" customClass="Placesta">
+                    <navigationItem key="navigationItem" title="My places" largeTitleDisplayMode="never" id="f5R-qM-GSp" customClass="Placesta">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xef-5a-Dl6">
                             <connections>
                                 <segue destination="JGx-Xc-ZT2" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="jXe-3c-Nvf"/>
@@ -86,7 +86,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egt-tV-dsc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289.85507246376812" y="423.88392857142856"/>
+            <point key="canvasLocation" x="263" y="422"/>
         </scene>
         <!--New place-->
         <scene sceneID="t5s-q8-sxh">
@@ -233,7 +233,7 @@
                             <outlet property="delegate" destination="PXK-gq-ncq" id="zME-x8-RRP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New place" id="7KO-RX-tql">
+                    <navigationItem key="navigationItem" title="New place" largeTitleDisplayMode="always" id="7KO-RX-tql">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aYR-BT-U7I">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="PXK-gq-ncq" id="xEQ-OJ-iM0"/>
@@ -256,14 +256,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtE-1d-hvK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="q73-KN-SXH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2073.913043478261" y="423.88392857142856"/>
+            <point key="canvasLocation" x="1073" y="423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lo3-R9-ywD">
             <objects>
                 <navigationController id="3xt-oJ-IJ1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mtx-cq-7YE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Mtx-cq-7YE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -290,9 +290,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCV-Pz-ghS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1163.768115942029" y="423.88392857142856"/>
+            <point key="canvasLocation" x="1074" y="-414"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="uV2-1Q-2hz"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
         <systemColor name="systemBackgroundColor">

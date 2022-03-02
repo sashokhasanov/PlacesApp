@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PlacesTableViewController: UITableViewController {
 
-    var places = PlaceModel.getPlaces()
+    var places: Results<Place>!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        places = realm.objects(Place.self)
     }
 
     // MARK: - Table view data source
@@ -32,25 +34,49 @@ class PlacesTableViewController: UITableViewController {
             placeCell.nameLabel.text = place.name
             placeCell.locationLabel.text = place.location
             placeCell.typeLabel.text = place.type
-            placeCell.placeImage.image =
-                place.predefinedImage == nil ? place.image : UIImage(named: place.predefinedImage!)
             
+            placeCell.placeImage.image = UIImage(data: place.imageData!)
             placeCell.placeImage.layer.cornerRadius = placeCell.placeImage.frame.height / 2
             placeCell.placeImage.clipsToBounds = true
         }
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let place = places[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetails" {
+            
+            guard let targetVieController = segue.destination as? NewPlaceViewController else {
+                return
+            }
+            
+            guard let indexPath = tableView.indexPathForSelectedRow else {
+                return
+            }
+            
+            let place = places[indexPath.row]
+            
+            targetVieController.currentPlace = place
+            
+        }
     }
-    */
+
     
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
         
@@ -58,8 +84,8 @@ class PlacesTableViewController: UITableViewController {
             return
         }
         
-        places.append(newPlaceVicewController.getNewPlace())
-        
+        newPlaceVicewController.savePlace()
+
         tableView.reloadData()
     }
 
