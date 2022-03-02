@@ -77,6 +77,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My places" largeTitleDisplayMode="never" id="f5R-qM-GSp" customClass="Placesta">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.up" catalog="system" id="apy-Vd-OcD">
+                            <connections>
+                                <action selector="reverseSortingDirection:" destination="Gi5-2q-8jx" id="6C1-8A-dyT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xef-5a-Dl6">
                             <connections>
                                 <segue destination="JGx-Xc-ZT2" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="jXe-3c-Nvf"/>
@@ -294,10 +299,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uV2-1Q-2hz"/>
+        <segue reference="5io-eY-ost"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
+        <image name="arrow.up" catalog="system" width="120" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
