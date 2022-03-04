@@ -27,6 +27,8 @@ class NewPlaceViewController: UITableViewController {
         placeName.addTarget(self, action: #selector(placeNameChanged), for: .editingChanged)
         
         setupEditScreen()
+        
+        
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -61,6 +63,10 @@ class NewPlaceViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
     }
     
     func savePlace() {
