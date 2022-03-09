@@ -31,41 +31,60 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="q4a-W5-PlO">
-                                            <rect key="frame" x="96" y="10" width="298" height="64"/>
+                                            <rect key="frame" x="96" y="10" width="200" height="64"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9X-Rd-EkS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFI-ji-0Ca">
-                                                    <rect key="frame" x="0.0" y="26.5" width="298" height="18"/>
+                                                    <rect key="frame" x="0.0" y="26.5" width="200" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtc-pd-fnS">
-                                                    <rect key="frame" x="0.0" y="49.5" width="298" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="49.5" width="200" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="90" placeholderIntrinsicHeight="14" translatesAutoresizingMaskIntoConstraints="NO" id="5Dz-3z-b22" customClass="CosmosView" customModule="Cosmos">
+                                            <rect key="frame" x="304" y="35.5" width="90" height="14"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="jEv-SB-QlX"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                    <real key="value" value="14"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="q4a-W5-PlO" firstAttribute="top" secondItem="dCY-vQ-CIS" secondAttribute="top" id="0hr-XP-UfL"/>
                                         <constraint firstItem="dCY-vQ-CIS" firstAttribute="centerY" secondItem="lk0-p3-tVn" secondAttribute="centerY" id="E3e-Qf-rYN"/>
                                         <constraint firstItem="q4a-W5-PlO" firstAttribute="leading" secondItem="dCY-vQ-CIS" secondAttribute="trailing" constant="16" id="LMi-qP-RAc"/>
-                                        <constraint firstAttribute="trailing" secondItem="q4a-W5-PlO" secondAttribute="trailing" constant="20" symbolic="YES" id="ouk-Yd-jXE"/>
+                                        <constraint firstItem="5Dz-3z-b22" firstAttribute="centerY" secondItem="lk0-p3-tVn" secondAttribute="centerY" id="i2B-Ql-Ex4"/>
+                                        <constraint firstItem="5Dz-3z-b22" firstAttribute="centerY" secondItem="lk0-p3-tVn" secondAttribute="centerY" id="iF0-8y-0eW"/>
                                         <constraint firstItem="dCY-vQ-CIS" firstAttribute="leading" secondItem="lk0-p3-tVn" secondAttribute="leading" constant="15" id="r4J-9k-lWf"/>
+                                        <constraint firstItem="5Dz-3z-b22" firstAttribute="leading" secondItem="q4a-W5-PlO" secondAttribute="trailing" constant="8" id="voq-P5-HoT"/>
+                                        <constraint firstItem="5Dz-3z-b22" firstAttribute="trailing" secondItem="lk0-p3-tVn" secondAttribute="trailingMargin" id="wBF-CL-dCP"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="locationLabel" destination="kFI-ji-0Ca" id="QdX-bn-A8s"/>
                                     <outlet property="nameLabel" destination="Y9X-Rd-EkS" id="daT-ig-BFZ"/>
                                     <outlet property="placeImage" destination="dCY-vQ-CIS" id="2mg-jc-h3A"/>
+                                    <outlet property="ratingView" destination="5Dz-3z-b22" id="S5f-AP-MVC"/>
                                     <outlet property="typeLabel" destination="dtc-pd-fnS" id="6fE-NK-xbi"/>
                                     <segue destination="PXK-gq-ncq" kind="show" identifier="showDetails" id="5io-eY-ost"/>
                                 </connections>
@@ -245,11 +264,29 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="170" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="Knb-ks-pAK" customClass="CosmosView" customModule="Cosmos">
+                                                    <rect key="frame" x="122" y="57" width="170" height="30"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                            <real key="value" value="30"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Knb-ks-pAK" firstAttribute="centerY" secondItem="tyx-G2-FJI" secondAttribute="centerY" id="BML-iY-PF7"/>
                                                 <constraint firstItem="lem-JK-otD" firstAttribute="centerY" secondItem="tyx-G2-FJI" secondAttribute="centerY" id="DUc-Mo-HKV"/>
                                                 <constraint firstItem="lem-JK-otD" firstAttribute="centerX" secondItem="tyx-G2-FJI" secondAttribute="centerX" id="XuJ-Vo-gqT"/>
+                                                <constraint firstItem="Knb-ks-pAK" firstAttribute="centerX" secondItem="tyx-G2-FJI" secondAttribute="centerX" id="aaA-B7-2Qf"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="lem-JK-otD"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -273,6 +310,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cosmosView" destination="Knb-ks-pAK" id="5Wf-MH-Xx2"/>
                         <outlet property="placeImage" destination="0vF-Mu-9cY" id="3E3-lg-ELb"/>
                         <outlet property="placeLocation" destination="LmQ-Lt-gaK" id="OwJ-8e-jIo"/>
                         <outlet property="placeName" destination="K18-9c-TlT" id="toQ-wR-fl8"/>
@@ -322,6 +360,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="5Dz-3z-b22">
+            <size key="intrinsicContentSize" width="90" height="14"/>
+        </designable>
         <designable name="lem-JK-otD">
             <size key="intrinsicContentSize" width="252" height="44"/>
         </designable>
@@ -332,6 +373,8 @@
     <resources>
         <image name="Photo" width="195" height="196"/>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="emptyStar" width="255" height="256"/>
+        <image name="filledStar" width="237.5" height="238"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

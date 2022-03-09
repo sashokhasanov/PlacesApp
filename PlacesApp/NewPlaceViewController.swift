@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class NewPlaceViewController: UITableViewController {
 
@@ -15,6 +16,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var ratingControl: RatingView!
+    @IBOutlet weak var cosmosView: CosmosView!
     
     
     var currentPlace: Place?
@@ -83,7 +85,9 @@ class NewPlaceViewController: UITableViewController {
                              location: placeLocation.text,
                              type: placeType.text,
                              imageData: image?.pngData(),
-                             rating: Double(ratingControl.rating))
+//                             rating: Double(ratingControl.rating)
+                             rating: cosmosView.rating
+        )
         
         if currentPlace != nil {
             try! realm.write {
@@ -108,7 +112,8 @@ class NewPlaceViewController: UITableViewController {
         placeName.text = currentPlace.name
         placeLocation.text = currentPlace.location
         placeType.text = currentPlace.type
-        ratingControl.rating = Int(currentPlace.rating)
+//        ratingControl.rating = Int(currentPlace.rating)
+        cosmosView.rating = currentPlace.rating
         
         if let data = currentPlace.imageData, let image = UIImage(data: data) {
             placeImage.image = image

@@ -65,10 +65,9 @@ class PlacesTableViewController: UITableViewController {
         
         if isFiltering {
             return filteredPlaces.count
-        } else {
-            return places.count
-            
         }
+        
+        return places.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,17 +75,15 @@ class PlacesTableViewController: UITableViewController {
 
         if let placeCell = cell as? PlaceCell {
             
-            
-            
             let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
             
             placeCell.nameLabel.text = place.name
             placeCell.locationLabel.text = place.location
             placeCell.typeLabel.text = place.type
+            placeCell.ratingView.rating = place.rating
             
             placeCell.placeImage.image = UIImage(data: place.imageData!)
-            placeCell.placeImage.layer.cornerRadius = placeCell.placeImage.frame.height / 2
-            placeCell.placeImage.clipsToBounds = true
+            
         }
         
         return cell
