@@ -58,7 +58,7 @@
                                         <constraint firstItem="q4a-W5-PlO" firstAttribute="top" secondItem="dCY-vQ-CIS" secondAttribute="top" id="0hr-XP-UfL"/>
                                         <constraint firstItem="dCY-vQ-CIS" firstAttribute="centerY" secondItem="lk0-p3-tVn" secondAttribute="centerY" id="E3e-Qf-rYN"/>
                                         <constraint firstItem="q4a-W5-PlO" firstAttribute="leading" secondItem="dCY-vQ-CIS" secondAttribute="trailing" constant="16" id="LMi-qP-RAc"/>
-                                        <constraint firstAttribute="trailing" secondItem="q4a-W5-PlO" secondAttribute="trailing" constant="20" symbolic="YES" id="dqX-b6-e4A"/>
+                                        <constraint firstAttribute="trailing" secondItem="q4a-W5-PlO" secondAttribute="trailing" constant="20" symbolic="YES" id="ouk-Yd-jXE"/>
                                         <constraint firstItem="dCY-vQ-CIS" firstAttribute="leading" secondItem="lk0-p3-tVn" secondAttribute="leading" constant="15" id="r4J-9k-lWf"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -91,7 +91,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egt-tV-dsc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="263" y="422"/>
+            <point key="canvasLocation" x="262.31884057971018" y="421.875"/>
         </scene>
         <!--New place-->
         <scene sceneID="t5s-q8-sxh">
@@ -277,6 +277,7 @@
                         <outlet property="placeLocation" destination="LmQ-Lt-gaK" id="OwJ-8e-jIo"/>
                         <outlet property="placeName" destination="K18-9c-TlT" id="toQ-wR-fl8"/>
                         <outlet property="placeType" destination="NpO-W7-Kpn" id="nIA-fd-NWL"/>
+                        <outlet property="ratingControl" destination="lem-JK-otD" id="coH-lx-zBd"/>
                         <outlet property="saveButton" destination="Ayn-Ev-dpl" id="Bzd-fC-cW0"/>
                     </connections>
                 </tableViewController>

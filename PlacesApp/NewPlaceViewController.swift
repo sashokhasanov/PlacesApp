@@ -14,6 +14,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var ratingControl: RatingView!
     
     
     var currentPlace: Place?
@@ -27,8 +28,7 @@ class NewPlaceViewController: UITableViewController {
         placeName.addTarget(self, action: #selector(placeNameChanged), for: .editingChanged)
         
         setupEditScreen()
-        
-        
+
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -70,11 +70,7 @@ class NewPlaceViewController: UITableViewController {
     }
     
     func savePlace() {
-        let newPlace = Place()
-        newPlace.name = placeName.text ?? ""
-        newPlace.location = placeLocation.text
-        newPlace.type = placeType.text
-        
+
         var image: UIImage?
         
         if imagePicked {
@@ -83,7 +79,11 @@ class NewPlaceViewController: UITableViewController {
             image = UIImage(named: "imagePlaceholder")
         }
 
-        newPlace.imageData = image?.pngData()
+        let newPlace = Place(name: placeName.text ?? "",
+                             location: placeLocation.text,
+                             type: placeType.text,
+                             imageData: image?.pngData(),
+                             rating: Double(ratingControl.rating))
         
         if currentPlace != nil {
             try! realm.write {
@@ -91,6 +91,7 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
             StorageManager.saveObject(newPlace)
@@ -107,6 +108,7 @@ class NewPlaceViewController: UITableViewController {
         placeName.text = currentPlace.name
         placeLocation.text = currentPlace.location
         placeType.text = currentPlace.type
+        ratingControl.rating = Int(currentPlace.rating)
         
         if let data = currentPlace.imageData, let image = UIImage(data: data) {
             placeImage.image = image
