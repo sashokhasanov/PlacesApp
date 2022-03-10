@@ -23,5 +23,7 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) photo use</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>For directions to your favourite place</string>
 </dict>
 </plist>

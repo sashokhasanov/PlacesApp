@@ -71,15 +71,26 @@ class NewPlaceViewController: UITableViewController {
         return 0
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let segueId = segue.identifier, let mapViewController = segue.destination as? MapViewController else {
+            return
+        }
+        
+        mapViewController.incomeSegueId = segueId
+        mapViewController.delegate = self
+        
+        if segueId == "showPlace" {
+            mapViewController.place.name = placeName.text ?? ""
+            mapViewController.place.location = placeLocation.text
+            mapViewController.place.type = placeType.text
+            mapViewController.place.imageData = placeImage.image?.pngData()
+        }
+    }
+    
     func savePlace() {
 
-        var image: UIImage?
-        
-        if imagePicked {
-            image = placeImage.image
-        } else {
-            image = UIImage(named: "imagePlaceholder")
-        }
+        let image = imagePicked ?  placeImage.image : UIImage(named: "imagePlaceholder")
 
         let newPlace = Place(name: placeName.text ?? "",
                              location: placeLocation.text,
@@ -171,4 +182,9 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true)
     }
     
+}
+extension NewPlaceViewController: MapViewControllerDelegate {
+    func getAddress(address: String?) {
+        placeLocation.text = address
+    }
 }
