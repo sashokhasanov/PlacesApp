@@ -15,9 +15,7 @@ class MapManager {
     private let regionDeltaMeters = 1000.0
     private var directions: [MKDirections] = []
     private var placeCoordinate: CLLocationCoordinate2D?
-    
-    
-    
+
     func setupPlacemark(place: Place, mapView: MKMapView) {
         
         guard let placeLocation = place.location else {
@@ -62,8 +60,8 @@ class MapManager {
     }
     
     func checkLocationAuthorization(mapView: MKMapView, segueId: String) {
+        
         switch locationManager.authorizationStatus {
-            
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
@@ -77,7 +75,7 @@ class MapManager {
             break
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
-            if segueId == "showAddress" {
+            if segueId == "getAddress" {
                 showUserLocation(mapView: mapView)
             }
         @unknown default:
@@ -88,13 +86,12 @@ class MapManager {
     func showUserLocation(mapView: MKMapView) {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion(center: location,
-                                            span: MKCoordinateSpan(latitudeDelta: regionDeltaMeters,
-                                                                   longitudeDelta: regionDeltaMeters))
+                                            latitudinalMeters: regionDeltaMeters,
+                                            longitudinalMeters: regionDeltaMeters)
+
             mapView.setRegion(region, animated: true)
         }
     }
-    
-    
     
     func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> Void) {
         
@@ -152,7 +149,7 @@ class MapManager {
         request.destination = MKMapItem(placemark: destination)
         request.source = MKMapItem(placemark: startingLocation)
         request.transportType = .automobile
-        request.requestsAlternateRoutes = true
+        request.requestsAlternateRoutes = false
         
         return request
     }
@@ -197,7 +194,7 @@ class MapManager {
         
         let alertWindow = UIWindow(frame: UIScreen.main.bounds)
         alertWindow.rootViewController = UIViewController()
-        alertWindow.windowLevel = UIWindow.Level.alert + 1
+        alertWindow.windowLevel = UIWindow.Level.alert + 100
         alertWindow.makeKeyAndVisible()
         
         alertWindow.rootViewController?.present(alert, animated: true)

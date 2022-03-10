@@ -18,12 +18,12 @@ protocol MapViewControllerDelegate {
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var mapPinImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var doneButton: UIButton!
     
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var routeButton: UIButton!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     let mapManager = MapManager()
     var place: Place = Place()
@@ -49,7 +49,6 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         addressLabel.text = ""
-        mapView.delegate = self
         setupMapView()
     }
     
@@ -76,7 +75,7 @@ class MapViewController: UIViewController {
     
     private func setupMapView() {
         
-        routeButton.isHidden = true
+        mapView.delegate = self
         
         mapManager.checkLocationServices(mapView: mapView, segueId: incomeSegueId) {
             mapManager.locationManager.delegate = self
@@ -84,10 +83,11 @@ class MapViewController: UIViewController {
         
         if incomeSegueId == "showPlace" {
             mapManager.setupPlacemark(place: place, mapView: mapView)
-            mapPinImage.isHidden = true
-            addressLabel.isHidden = true
-            doneButton.isHidden = true
             routeButton.isHidden = false
+        } else {
+            mapPinImage.isHidden = false
+            doneButton.isHidden = false
+            blurView.isHidden = false
         }
     }
 }
@@ -174,5 +174,12 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         mapManager.checkLocationAuthorization(mapView: mapView, segueId: incomeSegueId)
+    }
+}
+
+extension MapViewController {
+    enum Mode {
+        case showPlace
+        case selectAddress
     }
 }
