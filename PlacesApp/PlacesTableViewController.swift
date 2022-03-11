@@ -166,14 +166,15 @@ class PlacesTableViewController: UITableViewController {
 
 extension PlacesTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
-        filterCOntentForSearchText(searchController.searchBar.text ?? "")
+        if isFiltering {
+            filterCOntentForSearchText(searchController.searchBar.text ?? "")
+        }
         
     }
     
     private func filterCOntentForSearchText(_ searchText: String) {
         
-        filteredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS %@", searchText)
+        filteredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText)
         
         tableView.reloadData()
     }
