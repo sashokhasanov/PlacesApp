@@ -62,12 +62,25 @@
                                                 <constraint firstAttribute="width" constant="90" id="jEv-SB-QlX"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
-                                                <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="starSize">
                                                     <real key="value" value="14"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                    <color key="value" systemColor="labelColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                    <color key="value" systemColor="systemBackgroundColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                    <color key="value" systemColor="labelColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                    <color key="value" systemColor="labelColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
@@ -295,8 +308,21 @@
                                                         <userDefinedRuntimeAttribute type="number" keyPath="starSize">
                                                             <real key="value" value="30"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                            <color key="value" systemColor="systemBackgroundColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                            <color key="value" systemColor="labelColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                            <color key="value" systemColor="labelColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                            <color key="value" systemColor="labelColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -583,14 +609,15 @@
         <image name="Photo" width="195" height="196"/>
         <image name="arrow.up" catalog="system" width="120" height="128"/>
         <image name="car.fill" catalog="system" width="128" height="93"/>
-        <image name="emptyStar" width="255" height="256"/>
-        <image name="filledStar" width="237.5" height="238"/>
         <image name="location.circle.fill" catalog="system" width="128" height="121"/>
         <image name="map" width="50" height="50"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="mappin.circle" catalog="system" width="128" height="121"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
