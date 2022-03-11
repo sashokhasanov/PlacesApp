@@ -13,6 +13,7 @@ class MapManager {
     let locationManager = CLLocationManager()
     
     private let regionDeltaMeters = 1000.0
+    
     private var directions: [MKDirections] = []
     private var placeCoordinate: CLLocationCoordinate2D?
 
@@ -46,57 +47,49 @@ class MapManager {
         }
     }
     
-    func checkLocationServices(mapView: MKMapView, segueId: String, closure: () -> Void) {
+    func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            checkLocationAuthorization(mapView: mapView, segueId: segueId)
-            closure()
+            checkLocationAuthorization()
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showAlert(title: "Location services are disabled",
-                               message: "Please enable location services")
-            }
+            AlertSevice.shared.showPredefinedAlert(type: .locationServicesUnavailable)
         }
     }
     
-    func checkLocationAuthorization(mapView: MKMapView, segueId: String) {
+    func checkLocationAuthorization() {
         
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            fallthrough
-        case .denied:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showAlert(title: "Location services are disabled",
-                               message: "Please enable location services")
-            }
-        case .authorizedAlways:
-            break
-        case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
-            if segueId == "getAddress" {
-                showUserLocation(mapView: mapView)
-            }
+            
+        case .restricted, .denied:
+            AlertSevice.shared.showPredefinedAlert(type: .locationAccessDenied)
+            
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.requestLocation()
+            
         @unknown default:
             print("unknown case")
         }
     }
     
     func showUserLocation(mapView: MKMapView) {
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion(center: location,
-                                            latitudinalMeters: regionDeltaMeters,
-                                            longitudinalMeters: regionDeltaMeters)
-
-            mapView.setRegion(region, animated: true)
+        
+        guard let location = locationManager.location?.coordinate else {
+            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
+            return
         }
+        
+        let region = MKCoordinateRegion(center: location,
+                                        latitudinalMeters: regionDeltaMeters,
+                                        longitudinalMeters: regionDeltaMeters)
+
+        mapView.setRegion(region, animated: true)
     }
     
     func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> Void) {
         
         guard let coordinate = locationManager.location?.coordinate else {
-            showAlert(title: "Error", message: "Location is not found")
+            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
             return
         }
         
@@ -104,7 +97,7 @@ class MapManager {
         previousLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         
         guard let request = createDirectionsRequest(from: coordinate) else {
-            showAlert(title: "Error", message: "Failed to build route")
+            AlertSevice.shared.showPredefinedAlert(type: .failedToBuildRoute)
             return
         }
         
@@ -118,36 +111,34 @@ class MapManager {
             }
             
             guard let response = response else {
-                self.showAlert(title: "Error", message: "Failed to build route")
+                AlertSevice.shared.showPredefinedAlert(type: .failedToBuildRoute)
                 return
             }
             
             for route in response.routes {
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                
-                let distance = String(format: "$.1f", route.distance / 1000)
-                let time = route.expectedTravelTime
-                
-                print("Distance: \(distance)km")
-                print("Time: \(time)s")
+//
+//                let distance = String(format: "$.1f", route.distance / 1000)
+//                let time = route.expectedTravelTime
+//
+//                print("Distance: \(distance)km")
+//                print("Time: \(time)s")
             }
         }
     }
     
     private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
-        
         guard let destinationCoordinate = placeCoordinate else {
             return nil
         }
         
-        let startingLocation = MKPlacemark(coordinate: coordinate)
-        
-        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        let sourcePlacemark = MKPlacemark(coordinate: coordinate)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
         
         let request = MKDirections.Request()
-        request.destination = MKMapItem(placemark: destination)
-        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destinationPlacemark)
+        request.source = MKMapItem(placemark: sourcePlacemark)
         request.transportType = .automobile
         request.requestsAlternateRoutes = false
         
@@ -166,8 +157,6 @@ class MapManager {
         }
         
         closure(center)
-        
-
     }
     
     func getCenterLocation(for mapView: MKMapView) -> CLLocation {
@@ -177,7 +166,6 @@ class MapManager {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    
     private func resetMapView(with newDirections: MKDirections, mapView: MKMapView) {
         mapView.removeOverlays(mapView.overlays)
         directions.append(newDirections)
@@ -185,19 +173,4 @@ class MapManager {
         directions.removeAll()
         
     }
-    
-    
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(action)
-        
-        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        alertWindow.rootViewController = UIViewController()
-        alertWindow.windowLevel = UIWindow.Level.alert + 100
-        alertWindow.makeKeyAndVisible()
-        
-        alertWindow.rootViewController?.present(alert, animated: true)
-    }
-    
 }

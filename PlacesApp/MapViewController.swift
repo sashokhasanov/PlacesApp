@@ -11,12 +11,12 @@ import CoreLocation
 
 
 protocol MapViewControllerDelegate {
-    func getAddress(address: String?)
+    func setUpAddress(address: String?)
 }
-
 
 class MapViewController: UIViewController {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -25,11 +25,14 @@ class MapViewController: UIViewController {
     @IBOutlet weak var routeButton: UIButton!
     @IBOutlet weak var blurView: UIVisualEffectView!
     
+    let locationManager = CLLocationManager()
+    
     let mapManager = MapManager()
     var place: Place = Place()
     var delegate: MapViewControllerDelegate?
     
-    let annotationId = "annotationId"
+    let annotationId = "placeAnnotationId"
+    
     var incomeSegueId = ""
     
     var previousLocation: CLLocation? {
@@ -48,8 +51,30 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addressLabel.text = ""
-        setupMapView()
+        setupViewController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        mapManager.checkLocationServices()
+        
+        if incomeSegueId == "showPlace" {
+            mapManager.setupPlacemark(place: place, mapView: mapView)
+        }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func closeButtonPressed() {
+        dismiss(animated: true)
+    }
+
+    @IBAction func doneButtonPressed() {
+        delegate?.setUpAddress(address: addressLabel.text)
+        dismiss(animated: true)
+    }
+    
+    @IBAction func userLocationButtonPressed() {
+        mapManager.showUserLocation(mapView: mapView)
     }
     
     @IBAction func routeButtonPressed() {
@@ -58,40 +83,30 @@ class MapViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func closeMap() {
-        dismiss(animated: true)
-    }
-    
-    @IBAction func doneButtonPressed() {
-        delegate?.getAddress(address: addressLabel.text)
-        dismiss(animated: true)
-    }
-    
-    @IBAction func centerByUSerLocation() {
-        mapManager.showUserLocation(mapView: mapView)
-    }
-    
-    
-    private func setupMapView() {
-        
+    //  MARK: - Private methods
+    private func setupViewController() {
         mapView.delegate = self
+        mapView.showsUserLocation = true
         
-        mapManager.checkLocationServices(mapView: mapView, segueId: incomeSegueId) {
-            mapManager.locationManager.delegate = self
-        }
-        
+        setupMapManager()
+
         if incomeSegueId == "showPlace" {
-            mapManager.setupPlacemark(place: place, mapView: mapView)
             routeButton.isHidden = false
         } else {
             mapPinImage.isHidden = false
             doneButton.isHidden = false
             blurView.isHidden = false
+            addressLabel.text = ""
         }
+    }
+    
+    private func setupMapManager() {
+        mapManager.locationManager.delegate = self
+        mapManager.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 }
 
+// MARK: - MKMapViewDelegate
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -101,7 +116,6 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationId) as? MKPinAnnotationView
-        
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationId)
             annotationView?.canShowCallout = true
@@ -119,8 +133,6 @@ extension MapViewController: MKMapViewDelegate {
         return annotationView
     }
     
-    
-    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapManager.getCenterLocation(for: mapView)
         
@@ -133,7 +145,6 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         geocoder.cancelGeocode()
-        
         geocoder.reverseGeocodeLocation(center) { placemarks, error in
             if let error = error {
                 print(error)
@@ -145,12 +156,10 @@ extension MapViewController: MKMapViewDelegate {
             }
             
             let placemark = placemarks.first
-            
             let streetName = placemark?.thoroughfare
             let buildingNumber = placemark?.subThoroughfare
             
             DispatchQueue.main.async {
-                
                 if streetName != nil && buildingNumber != nil {
                     self.addressLabel.text = "\(streetName!), \(buildingNumber!)"
                 } else if streetName != nil {
@@ -162,19 +171,30 @@ extension MapViewController: MKMapViewDelegate {
         }
     }
     
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .blue
-        
         return renderer
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension MapViewController: CLLocationManagerDelegate {
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        mapManager.checkLocationAuthorization(mapView: mapView, segueId: incomeSegueId)
+        mapManager.checkLocationAuthorization()
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if incomeSegueId == "getAddress" {
+            mapManager.showUserLocation(mapView: mapView)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
 }
 
 extension MapViewController {

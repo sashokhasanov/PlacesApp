@@ -146,7 +146,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="map"/>
                                                     <connections>
-                                                        <segue destination="pib-3P-ixs" kind="presentation" identifier="showPlace" id="Ex0-vi-MKC"/>
+                                                        <segue destination="pib-3P-ixs" kind="presentation" identifier="showPlace" modalPresentationStyle="fullScreen" id="Ex0-vi-MKC"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -361,14 +361,14 @@
             <objects>
                 <viewController id="pib-3P-ixs" customClass="MapViewController" customModule="PlacesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dlh-wT-wSc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="g49-Kk-4Qz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn0-XO-Ajg">
-                                <rect key="frame" x="354" y="20" width="40" height="40"/>
+                                <rect key="frame" x="354" y="64" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="DXy-tH-mJM"/>
                                     <constraint firstAttribute="height" constant="40" id="GkT-3U-J5i"/>
@@ -387,11 +387,11 @@
                                     </preferredSymbolConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="closeMap" destination="pib-3P-ixs" eventType="touchUpInside" id="nwo-OX-Cbn"/>
+                                    <action selector="closeButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="nwo-OX-Cbn"/>
                                 </connections>
                             </button>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iS5-vu-d8j">
-                                <rect key="frame" x="187" y="380.5" width="40" height="40.5"/>
+                                <rect key="frame" x="187" y="407.5" width="40" height="40.5"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Swg-aC-PLg"/>
@@ -400,7 +400,7 @@
                                 <imageReference key="image" image="mappin.and.ellipse" catalog="system" renderingMode="original"/>
                             </imageView>
                             <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdt-uf-IBC">
-                                <rect key="frame" x="20" y="94" width="374" height="44"/>
+                                <rect key="frame" x="20" y="138" width="374" height="44"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eMa-yv-Mgu">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -430,7 +430,7 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hby-Kx-ycK">
-                                <rect key="frame" x="148" y="718" width="118" height="50"/>
+                                <rect key="frame" x="148" y="772" width="118" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done">
@@ -448,7 +448,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-JH-xrS">
-                                <rect key="frame" x="102" y="718" width="210" height="50"/>
+                                <rect key="frame" x="102" y="772" width="210" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="car.fill" catalog="system" title="Build route" imagePadding="9" titleAlignment="center">
@@ -466,7 +466,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGu-Nh-e1n">
-                                <rect key="frame" x="344" y="718" width="50" height="50"/>
+                                <rect key="frame" x="344" y="772" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="EXg-EH-zlu"/>
                                     <constraint firstAttribute="height" constant="50" id="plN-GH-LmX"/>
@@ -486,7 +486,7 @@
                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="centerByUSerLocation" destination="pib-3P-ixs" eventType="touchUpInside" id="yII-nJ-VTn"/>
+                                    <action selector="userLocationButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="yII-nJ-VTn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -564,6 +564,9 @@
     <designables>
         <designable name="5Dz-3z-b22">
             <size key="intrinsicContentSize" width="90" height="14"/>
+        </designable>
+        <designable name="Knb-ks-pAK">
+            <size key="intrinsicContentSize" width="170" height="30"/>
         </designable>
         <designable name="lem-JK-otD">
             <size key="intrinsicContentSize" width="252" height="44"/>
