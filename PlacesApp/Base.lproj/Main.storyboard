@@ -232,7 +232,7 @@
                                                         <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <segue destination="pib-3P-ixs" kind="presentation" identifier="getAddress" id="KAf-oU-ose"/>
+                                                        <segue destination="pib-3P-ixs" kind="presentation" identifier="getAddress" modalPresentationStyle="fullScreen" id="KAf-oU-ose"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -489,6 +489,24 @@
                                     <action selector="userLocationButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="yII-nJ-VTn"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygc-1s-Iwb">
+                                <rect key="frame" x="103" y="772" width="208" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system" title="Clear route" imagePadding="9" titleAlignment="center">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                    <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
+                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="routeButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="lBv-1p-J29"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ijx-TV-d9b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -508,6 +526,8 @@
                             <constraint firstItem="Hby-Kx-ycK" firstAttribute="centerX" secondItem="dlh-wT-wSc" secondAttribute="centerX" id="cOg-gL-Bgg"/>
                             <constraint firstItem="Fdt-uf-IBC" firstAttribute="leading" secondItem="Ijx-TV-d9b" secondAttribute="leading" constant="20" id="giV-I3-19k"/>
                             <constraint firstItem="AOa-JH-xrS" firstAttribute="centerX" secondItem="dlh-wT-wSc" secondAttribute="centerX" id="hdF-AP-IKh"/>
+                            <constraint firstItem="ygc-1s-Iwb" firstAttribute="centerY" secondItem="tGu-Nh-e1n" secondAttribute="centerY" id="j5I-39-ea8"/>
+                            <constraint firstItem="ygc-1s-Iwb" firstAttribute="centerX" secondItem="dlh-wT-wSc" secondAttribute="centerX" id="kvj-LG-WZO"/>
                             <constraint firstAttribute="bottom" secondItem="g49-Kk-4Qz" secondAttribute="bottom" id="rBx-yK-VAd"/>
                             <constraint firstItem="Ijx-TV-d9b" firstAttribute="trailing" secondItem="tGu-Nh-e1n" secondAttribute="trailing" constant="20" id="tqp-Dm-cqe"/>
                             <constraint firstItem="iS5-vu-d8j" firstAttribute="centerY" secondItem="dlh-wT-wSc" secondAttribute="centerY" constant="-20" id="zYw-j1-wQO"/>
@@ -516,6 +536,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="hkK-KN-zZ8" id="aSL-Gg-QBE"/>
                         <outlet property="blurView" destination="Fdt-uf-IBC" id="NQb-Pk-lKm"/>
+                        <outlet property="clearRouteButton" destination="ygc-1s-Iwb" id="tv5-QU-3SC"/>
                         <outlet property="doneButton" destination="Hby-Kx-ycK" id="qpb-y0-x6c"/>
                         <outlet property="mapPinImage" destination="iS5-vu-d8j" id="cRT-b7-psh"/>
                         <outlet property="mapView" destination="g49-Kk-4Qz" id="03C-zk-UyT"/>
@@ -573,7 +594,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Ex0-vi-MKC"/>
+        <segue reference="KAf-oU-ose"/>
         <segue reference="5io-eY-ost"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -586,6 +607,7 @@
         <image name="map" width="50" height="50"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="mappin.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

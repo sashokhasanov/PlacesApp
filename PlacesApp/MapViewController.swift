@@ -9,11 +9,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
+// MARK: - Protocol MapViewControllerDelegate
 protocol MapViewControllerDelegate {
     func setUpAddress(address: String?)
 }
 
+// MARK: - MapViewController
 class MapViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -23,42 +24,24 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var routeButton: UIButton!
+    @IBOutlet weak var clearRouteButton: UIButton!
     @IBOutlet weak var blurView: UIVisualEffectView!
-    
-    let locationManager = CLLocationManager()
     
     let mapManager = MapManager()
     var place: Place = Place()
     var delegate: MapViewControllerDelegate?
     
     let annotationId = "placeAnnotationId"
+    var controllerMode = Mode.showPlace
     
-    var incomeSegueId = ""
-    
-    var previousLocation: CLLocation? {
-        didSet {
-            mapManager.startTrackingUserLocation(for: mapView, previousLocation: previousLocation) { currentLocation in
-                self.previousLocation = currentLocation
-        
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.mapManager.showUserLocation(mapView: self.mapView)
-        
-                }
-            }
-        }
-    }
-    
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViewController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        mapManager.checkLocationServices()
-        
-        if incomeSegueId == "showPlace" {
+        if controllerMode == .showPlace {
             mapManager.setupPlacemark(place: place, mapView: mapView)
         }
     }
@@ -78,19 +61,13 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func routeButtonPressed() {
-        mapManager.getDirections(for: mapView) { location in
-            self.previousLocation = location
-        }
+        mapManager.getDirections(for: mapView)
     }
     
     //  MARK: - Private methods
     private func setupViewController() {
-        mapView.delegate = self
-        mapView.showsUserLocation = true
         
-        setupMapManager()
-
-        if incomeSegueId == "showPlace" {
+        if controllerMode == .showPlace {
             routeButton.isHidden = false
         } else {
             mapPinImage.isHidden = false
@@ -98,11 +75,22 @@ class MapViewController: UIViewController {
             blurView.isHidden = false
             addressLabel.text = ""
         }
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        
+        mapManager.attemptLocationAccess {
+            mapManager.locationManager.delegate = self
+            mapManager.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        }
     }
-    
-    private func setupMapManager() {
-        mapManager.locationManager.delegate = self
-        mapManager.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+}
+
+// MARK: - MapViewController + Mode enum
+extension MapViewController {
+    enum Mode {
+        case showPlace
+        case getAddress
     }
 }
 
@@ -110,7 +98,6 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         guard !(annotation is MKUserLocation) else {
             return nil
         }
@@ -134,17 +121,14 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        guard controllerMode == .getAddress else {
+            return
+        }
+        
         let center = mapManager.getCenterLocation(for: mapView)
         
         let geocoder = CLGeocoder()
-        
-        if incomeSegueId == "showPlace", previousLocation != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                self.mapManager.showUserLocation(mapView: self.mapView)
-            }
-        }
-        
-        geocoder.cancelGeocode()
         geocoder.reverseGeocodeLocation(center) { placemarks, error in
             if let error = error {
                 print(error)
@@ -182,24 +166,36 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        mapManager.checkLocationAuthorization()
+        guard manager.authorizationStatus != .notDetermined else {
+            return
+        }
+        manager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if incomeSegueId == "getAddress" {
-            mapManager.showUserLocation(mapView: mapView)
+        guard controllerMode == .getAddress else {
+            return
         }
+        manager.stopUpdatingLocation()
+        mapManager.showUserLocation(mapView: mapView)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
+        guard let error = error as? CLError else {
+            return
+        }
+        
+        manager.stopUpdatingLocation()
+        
+        switch error.code {
+        case CLError.Code.locationUnknown:
+            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
+        case CLError.Code.denied:
+            AlertSevice.shared.showPredefinedAlert(type: .locationAccessDenied)
+        default:
+            print("Location manager error: \(error.localizedDescription)")
+        }
     }
-    
 }
 
-extension MapViewController {
-    enum Mode {
-        case showPlace
-        case selectAddress
-    }
-}
+

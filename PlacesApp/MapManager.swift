@@ -13,12 +13,10 @@ class MapManager {
     let locationManager = CLLocationManager()
     
     private let regionDeltaMeters = 1000.0
-    
     private var directions: [MKDirections] = []
     private var placeCoordinate: CLLocationCoordinate2D?
 
     func setupPlacemark(place: Place, mapView: MKMapView) {
-        
         guard let placeLocation = place.location else {
             return
         }
@@ -47,28 +45,19 @@ class MapManager {
         }
     }
     
-    func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {
-            checkLocationAuthorization()
-        } else {
-            AlertSevice.shared.showPredefinedAlert(type: .locationServicesUnavailable)
-        }
-    }
-    
-    func checkLocationAuthorization() {
+    func attemptLocationAccess(managerSetup: () -> Void) {
         
-        switch locationManager.authorizationStatus {
-        case .notDetermined:
+        guard CLLocationManager.locationServicesEnabled() else {
+            AlertSevice.shared.showPredefinedAlert(type: .locationServicesUnavailable)
+            return
+        }
+        
+        managerSetup()
+        
+        if locationManager.authorizationStatus == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
-            
-        case .restricted, .denied:
-            AlertSevice.shared.showPredefinedAlert(type: .locationAccessDenied)
-            
-        case .authorizedAlways, .authorizedWhenInUse:
-            locationManager.requestLocation()
-            
-        @unknown default:
-            print("unknown case")
+        } else {
+            locationManager.startUpdatingLocation()
         }
     }
     
@@ -85,8 +74,8 @@ class MapManager {
 
         mapView.setRegion(region, animated: true)
     }
-    
-    func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> Void) {
+
+    func getDirections(for mapView: MKMapView) {
         
         guard let coordinate = locationManager.location?.coordinate else {
             AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
@@ -94,8 +83,8 @@ class MapManager {
         }
         
         locationManager.startUpdatingLocation()
-        previousLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
-        
+        mapView.userTrackingMode = .follow
+
         guard let request = createDirectionsRequest(from: coordinate) else {
             AlertSevice.shared.showPredefinedAlert(type: .failedToBuildRoute)
             return
@@ -118,15 +107,10 @@ class MapManager {
             for route in response.routes {
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-//
-//                let distance = String(format: "$.1f", route.distance / 1000)
-//                let time = route.expectedTravelTime
-//
-//                print("Distance: \(distance)km")
-//                print("Time: \(time)s")
             }
         }
     }
+    
     
     private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else {
@@ -145,20 +129,6 @@ class MapManager {
         return request
     }
     
-    func startTrackingUserLocation(for mapView: MKMapView, previousLocation: CLLocation?, closure: (_ currentLocation: CLLocation) -> Void) {
-        guard let previousLocation = previousLocation else {
-            return
-        }
-        
-        let center = getCenterLocation(for: mapView)
-        
-        guard center.distance(from: previousLocation) > 50 else {
-            return
-        }
-        
-        closure(center)
-    }
-    
     func getCenterLocation(for mapView: MKMapView) -> CLLocation {
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
@@ -168,9 +138,9 @@ class MapManager {
     
     private func resetMapView(with newDirections: MKDirections, mapView: MKMapView) {
         mapView.removeOverlays(mapView.overlays)
-        directions.append(newDirections)
         let _ = directions.map { $0.cancel() }
         directions.removeAll()
         
+        directions.append(newDirections)
     }
 }
