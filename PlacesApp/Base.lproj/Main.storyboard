@@ -335,9 +335,9 @@
                                 <action selector="cancelButtonPressed:" destination="PXK-gq-ncq" id="xEQ-OJ-iM0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ayn-Ev-dpl">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="Ayn-Ev-dpl">
                             <connections>
-                                <segue destination="q73-KN-SXH" kind="unwind" unwindAction="unwindSegue:" id="6DP-HA-G8f"/>
+                                <action selector="saveButtonPressed:" destination="PXK-gq-ncq" id="ht5-6P-SKp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -349,6 +349,7 @@
                         <outlet property="placeType" destination="NpO-W7-Kpn" id="nIA-fd-NWL"/>
                         <outlet property="ratingControl" destination="lem-JK-otD" id="coH-lx-zBd"/>
                         <outlet property="saveButton" destination="Ayn-Ev-dpl" id="Bzd-fC-cW0"/>
+                        <segue destination="q73-KN-SXH" kind="unwind" identifier="unwindSegue" unwindAction="unwind:" id="b2l-BI-rom"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtE-1d-hvK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

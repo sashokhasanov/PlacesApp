@@ -27,42 +27,47 @@ class NewPlaceViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveButton.isEnabled = false;
-        
         placeName.addTarget(self, action: #selector(placeNameChanged), for: .editingChanged)
-        
         setupEditScreen()
-
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true)
     }
     
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        savePlace()
+        performSegue(withIdentifier: "unwindSegue", sender: self)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-                self.chooseImagePicker(source: .camera)
-            }
-            camera.setValue(UIImage(named: "camera"), forKey: "image")
-            
-            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-                self.chooseImagePicker(source: .photoLibrary)
-            }
-            photo.setValue(UIImage(named: "photo"), forKey: "image")
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            actions.addAction(camera)
-            actions.addAction(photo)
-            actions.addAction(cancel)
-            
-            present(actions, animated: true)
+            showImageActionsSheet()
         } else {
             view.endEditing(true)
         }
+    }
+    
+    private func showImageActionsSheet() {
+        let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.chooseImagePicker(source: .camera)
+        }
+        camera.setValue(UIImage(named: "camera"), forKey: "image")
+        
+        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            self.chooseImagePicker(source: .photoLibrary)
+        }
+        photo.setValue(UIImage(named: "photo"), forKey: "image")
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        actions.addAction(camera)
+        actions.addAction(photo)
+        actions.addAction(cancel)
+        
+        present(actions, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -95,7 +100,7 @@ class NewPlaceViewController: UITableViewController {
     
     func savePlace() {
 
-        let image = imagePicked ?  placeImage.image : UIImage(named: "imagePlaceholder")
+        let image = imagePicked ? placeImage.image : UIImage(named: "imagePlaceholder")
 
         let newPlace = Place(name: placeName.text ?? "",
                              location: placeLocation.text,
