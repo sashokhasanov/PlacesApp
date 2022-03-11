@@ -288,14 +288,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lem-JK-otD" customClass="RatingView" customModule="PlacesApp" customModuleProvider="target">
-                                                    <rect key="frame" x="81" y="50" width="252" height="44"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="starSize">
-                                                            <size key="value" width="44" height="44"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </stackView>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="170" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="Knb-ks-pAK" customClass="CosmosView" customModule="Cosmos">
                                                     <rect key="frame" x="122" y="57" width="170" height="30"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -310,15 +302,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Knb-ks-pAK" firstAttribute="centerY" secondItem="tyx-G2-FJI" secondAttribute="centerY" id="BML-iY-PF7"/>
-                                                <constraint firstItem="lem-JK-otD" firstAttribute="centerY" secondItem="tyx-G2-FJI" secondAttribute="centerY" id="DUc-Mo-HKV"/>
-                                                <constraint firstItem="lem-JK-otD" firstAttribute="centerX" secondItem="tyx-G2-FJI" secondAttribute="centerX" id="XuJ-Vo-gqT"/>
                                                 <constraint firstItem="Knb-ks-pAK" firstAttribute="centerX" secondItem="tyx-G2-FJI" secondAttribute="centerX" id="aaA-B7-2Qf"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="subviews">
-                                                    <exclude reference="lem-JK-otD"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -347,7 +332,6 @@
                         <outlet property="placeLocation" destination="LmQ-Lt-gaK" id="OwJ-8e-jIo"/>
                         <outlet property="placeName" destination="K18-9c-TlT" id="toQ-wR-fl8"/>
                         <outlet property="placeType" destination="NpO-W7-Kpn" id="nIA-fd-NWL"/>
-                        <outlet property="ratingControl" destination="lem-JK-otD" id="coH-lx-zBd"/>
                         <outlet property="saveButton" destination="Ayn-Ev-dpl" id="Bzd-fC-cW0"/>
                         <segue destination="q73-KN-SXH" kind="unwind" identifier="unwindSegue" unwindAction="unwind:" id="b2l-BI-rom"/>
                     </connections>
@@ -589,9 +573,6 @@
         </designable>
         <designable name="Knb-ks-pAK">
             <size key="intrinsicContentSize" width="170" height="30"/>
-        </designable>
-        <designable name="lem-JK-otD">
-            <size key="intrinsicContentSize" width="252" height="44"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D4BA1A427D2437000F47F1B /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4BA1A327D2437000F47F1B /* RatingView.swift */; };
 		2DAB3F6E27C909B100CAD4E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */; };
 		2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */; };
 		2DAB3F7527C909B100CAD4E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3F7327C909B100CAD4E2 /* Main.storyboard */; };
@@ -27,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D4BA1A327D2437000F47F1B /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		2DAB3F6A27C909B100CAD4E2 /* PlacesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 			children = (
 				2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */,
 				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
-				2D4BA1A327D2437000F47F1B /* RatingView.swift */,
 				2DAB3FA527CCFC2200CAD4E2 /* Place.swift */,
 				2DAB3FA927CE575800CAD4E2 /* StorageManager.swift */,
 				2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */,
@@ -241,7 +238,6 @@
 				2DAB3F6E27C909B100CAD4E2 /* AppDelegate.swift in Sources */,
 				2DAB3FA827CD710B00CAD4E2 /* NewPlaceViewController.swift in Sources */,
 				2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */,
-				2D4BA1A427D2437000F47F1B /* RatingView.swift in Sources */,
 				2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */,
 				2DAEEA3827DBCFAA00379F87 /* UIApplication+topMostViewController.swift in Sources */,
 				2DAB3FAA27CE575800CAD4E2 /* StorageManager.swift in Sources */,
