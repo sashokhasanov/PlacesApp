@@ -10,6 +10,7 @@ import Cosmos
 
 class NewPlaceViewController: UITableViewController {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeName: UITextField!
@@ -22,6 +23,7 @@ class NewPlaceViewController: UITableViewController {
     var currentPlace: Place?
     var imagePicked = false
     
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,7 +70,7 @@ class NewPlaceViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        0
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,7 +79,10 @@ class NewPlaceViewController: UITableViewController {
             return
         }
         
-        mapViewController.incomeSegueId = segueId
+        if let mode = MapViewController.Mode(rawValue: segueId) {
+            mapViewController.controllerMode = mode
+        }
+        
         mapViewController.delegate = self
         
         if segueId == "showPlace" {
@@ -158,7 +163,7 @@ extension NewPlaceViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - Work with image
+// MARK: - Image processing
 extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
@@ -173,7 +178,6 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         }
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         placeImage.image = info[.editedImage] as? UIImage
         placeImage.contentMode = .scaleAspectFill
@@ -181,8 +185,9 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         imagePicked = true
         dismiss(animated: true)
     }
-    
 }
+
+// MARK: - MapViewControllerDelegate
 extension NewPlaceViewController: MapViewControllerDelegate {
     func setUpAddress(address: String?) {
         placeLocation.text = address

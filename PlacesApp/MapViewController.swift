@@ -88,7 +88,7 @@ class MapViewController: UIViewController {
 
 // MARK: - MapViewController + Mode enum
 extension MapViewController {
-    enum Mode {
+    enum Mode: String {
         case showPlace
         case getAddress
     }
