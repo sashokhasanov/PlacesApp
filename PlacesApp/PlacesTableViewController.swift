@@ -21,12 +21,12 @@ class PlacesTableViewController: UITableViewController {
         searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
     
-    var notificationToken: NotificationToken?
+    private var notificationToken: NotificationToken?
     
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        places = realm.objects(Place.self)
+        places = StorageManager.shared.realm.objects(Place.self)
         
         setupSearchController()
         observePlacesChanges()
@@ -45,7 +45,7 @@ class PlacesTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Name or location"
+        searchController.searchBar.placeholder = "Enter place name or location"
         
         searchController.searchBar.scopeButtonTitles = ["Date", "Name"]
         searchController.searchBar.showsScopeBar = true
@@ -114,7 +114,7 @@ extension PlacesTableViewController {
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            StorageManager.deleteObject(place)
+            StorageManager.shared.deleteObject(place)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -125,20 +125,21 @@ extension PlacesTableViewController {
 extension PlacesTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetails" {
-            
-            guard let targetVieController = segue.destination as? NewPlaceViewController else {
-                return
-            }
-            
-            guard let indexPath = tableView.indexPathForSelectedRow else {
-                return
-            }
-            
-            let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
-            
-            targetVieController.currentPlace = place
+        
+        guard segue.identifier == "showDetails" else {
+            return
         }
+        
+        guard let targetVieController = segue.destination as? NewPlaceViewController else {
+            return
+        }
+        
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+
+        let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
+        targetVieController.currentPlace = place
     }
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {}
@@ -146,6 +147,7 @@ extension PlacesTableViewController {
 
 // MARK: - UISearchResultsUpdating
 extension PlacesTableViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard isFiltering else {
             return

@@ -7,18 +7,43 @@
 
 import RealmSwift
 
-let realm = try! Realm()
-
 class StorageManager {
-    static func saveObject(_ place: Place) {
-        try! realm.write {
+    
+    static let shared = StorageManager()
+    
+    let realm = try! Realm()
+    
+    private init() {}
+    
+    func saveObject(_ place: Place) {
+        write {
             realm.add(place)
         }
     }
     
-    static func deleteObject(_ place: Place) {
-        try! realm.write {
+    func updateObject(_ place: Place, with newData: Place) {
+        write {
+            place.name = newData.name
+            place.location = newData.location
+            place.type = newData.type
+            place.imageData = newData.imageData
+            place.rating = newData.rating
+        }
+    }
+    
+    func deleteObject(_ place: Place) {
+        write {
             realm.delete(place)
+        }
+    }
+    
+    private func write(completion: () -> Void) {
+        do {
+            try realm.write {
+                completion()
+            }
+        } catch {
+            print(error)
         }
     }
 }

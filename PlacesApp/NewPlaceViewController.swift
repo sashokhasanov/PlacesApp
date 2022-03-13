@@ -16,7 +16,6 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
-    @IBOutlet weak var ratingControl: RatingView!
     @IBOutlet weak var cosmosView: CosmosView!
     
     
@@ -106,20 +105,13 @@ class NewPlaceViewController: UITableViewController {
                              location: placeLocation.text,
                              type: placeType.text,
                              imageData: image?.pngData(),
-//                             rating: Double(ratingControl.rating)
                              rating: cosmosView.rating
         )
         
-        if currentPlace != nil {
-            try! realm.write {
-                currentPlace?.name = newPlace.name
-                currentPlace?.location = newPlace.location
-                currentPlace?.type = newPlace.type
-                currentPlace?.imageData = newPlace.imageData
-                currentPlace?.rating = newPlace.rating
-            }
+        if let currentPlace = currentPlace {
+            StorageManager.shared.updateObject(currentPlace, with: newPlace)
         } else {
-            StorageManager.saveObject(newPlace)
+            StorageManager.shared.saveObject(newPlace)
         }
     }
     
@@ -133,7 +125,6 @@ class NewPlaceViewController: UITableViewController {
         placeName.text = currentPlace.name
         placeLocation.text = currentPlace.location
         placeType.text = currentPlace.type
-//        ratingControl.rating = Int(currentPlace.rating)
         cosmosView.rating = currentPlace.rating
         
         if let data = currentPlace.imageData, let image = UIImage(data: data) {
