@@ -353,11 +353,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cosmosView" destination="Knb-ks-pAK" id="5Wf-MH-Xx2"/>
                         <outlet property="placeImage" destination="0vF-Mu-9cY" id="3E3-lg-ELb"/>
                         <outlet property="placeLocation" destination="LmQ-Lt-gaK" id="OwJ-8e-jIo"/>
                         <outlet property="placeName" destination="K18-9c-TlT" id="toQ-wR-fl8"/>
                         <outlet property="placeType" destination="NpO-W7-Kpn" id="nIA-fd-NWL"/>
+                        <outlet property="ratingView" destination="Knb-ks-pAK" id="5Wf-MH-Xx2"/>
                         <outlet property="saveButton" destination="Ayn-Ev-dpl" id="Bzd-fC-cW0"/>
                         <segue destination="q73-KN-SXH" kind="unwind" identifier="unwindSegue" unwindAction="unwind:" id="b2l-BI-rom"/>
                     </connections>

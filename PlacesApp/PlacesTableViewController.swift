@@ -38,52 +38,6 @@ class PlacesTableViewController: UITableViewController {
         sender.image = UIImage(systemName: ascendingSorting ? "arrow.up" : "arrow.down")
         sortPlaces()
     }
-    
-    // MARK: - Private methods
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        
-        searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Enter place name or location"
-        
-        searchController.searchBar.scopeButtonTitles = ["Date", "Name"]
-        searchController.searchBar.showsScopeBar = true
-
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        definesPresentationContext = true
-    }
-    
-    private func sortPlaces() {
-        let sortingKeyPath =
-            searchController.searchBar.selectedScopeButtonIndex == 0 ? "date" : "name"
-        
-        places = places.sorted(byKeyPath: sortingKeyPath, ascending: ascendingSorting)
-        tableView.reloadData()
-    }
-    
-    private func observePlacesChanges() {
-        notificationToken = places.observe { changes in
-            switch changes {
-            case .initial:
-                self.tableView.reloadData()
-                
-            case .update(_, let deletions, let insertions, let modifications):
-                self.tableView.performBatchUpdates {
-                    // ! Always apply updates in the following order: deletions, insertions, then modifications.
-                    // Handling insertions before deletions may result in unexpected behavior.
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                }
-                
-            case .error(let error):
-                print(error)
-            }
-        }
-    }
 }
     
 // MARK: - Table view data source
@@ -139,7 +93,7 @@ extension PlacesTableViewController {
         }
 
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
-        targetVieController.currentPlace = place
+        targetVieController.editedPlace = place
     }
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {}
@@ -163,5 +117,54 @@ extension PlacesTableViewController: UISearchResultsUpdating {
 extension PlacesTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         sortPlaces()
+    }
+}
+
+// MARK: - Private methods
+extension PlacesTableViewController {
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Enter place name or location"
+        
+        searchController.searchBar.scopeButtonTitles = ["Date", "Name"]
+        searchController.searchBar.showsScopeBar = true
+
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        definesPresentationContext = true
+    }
+    
+    private func sortPlaces() {
+        let sortingKeyPath =
+            searchController.searchBar.selectedScopeButtonIndex == 0 ? "date" : "name"
+        
+        places = places.sorted(byKeyPath: sortingKeyPath, ascending: ascendingSorting)
+        tableView.reloadData()
+    }
+    
+    private func observePlacesChanges() {
+        notificationToken = places.observe { changes in
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+                
+            case .update(_, let deletions, let insertions, let modifications):
+                self.tableView.performBatchUpdates {
+                    // ! Always apply updates in the following order: deletions, insertions, then modifications.
+                    // Handling insertions before deletions may result in unexpected behavior.
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                }
+                
+            case .error(let error):
+                print(error)
+            }
+        }
     }
 }

@@ -16,10 +16,10 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
-    @IBOutlet weak var cosmosView: CosmosView!
+    @IBOutlet weak var ratingView: CosmosView!
     
-    
-    var currentPlace: Place?
+    // MARK: - Internal properties
+    var editedPlace: Place?
     var imagePicked = false
     
     // MARK: - Override methods
@@ -30,6 +30,7 @@ class NewPlaceViewController: UITableViewController {
         setupEditScreen()
     }
     
+    // MARK: - IBActions
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -38,47 +39,12 @@ class NewPlaceViewController: UITableViewController {
         savePlace()
         performSegue(withIdentifier: "unwindSegue", sender: self)
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            showImageActionsSheet()
-        } else {
-            view.endEditing(true)
-        }
-    }
-    
-    private func showImageActionsSheet() {
-        let actions = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-            self.chooseImagePicker(source: .camera)
-        }
-        camera.setValue(UIImage(named: "camera"), forKey: "image")
-        
-        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-            self.chooseImagePicker(source: .photoLibrary)
-        }
-        photo.setValue(UIImage(named: "photo"), forKey: "image")
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        actions.addAction(camera)
-        actions.addAction(photo)
-        actions.addAction(cancel)
-        
-        present(actions, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        0
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        0
-    }
+}
+
+// MARK: - Navigation
+extension NewPlaceViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         guard let segueId = segue.identifier, let mapViewController = segue.destination as? MapViewController else {
             return
         }
@@ -96,53 +62,25 @@ class NewPlaceViewController: UITableViewController {
             mapViewController.place.imageData = placeImage.image?.pngData()
         }
     }
+}
+
+// MARK: - Table view delegate
+extension NewPlaceViewController {
     
-    func savePlace() {
-
-        let image = imagePicked ? placeImage.image : UIImage(named: "imagePlaceholder")
-
-        let newPlace = Place(name: placeName.text ?? "",
-                             location: placeLocation.text,
-                             type: placeType.text,
-                             imageData: image?.pngData(),
-                             rating: cosmosView.rating
-        )
-        
-        if let currentPlace = currentPlace {
-            StorageManager.shared.updateObject(currentPlace, with: newPlace)
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            showImageActionsSheet()
         } else {
-            StorageManager.shared.saveObject(newPlace)
+            view.endEditing(true)
         }
-    }
-    
-    private func setupEditScreen() {
-        guard let currentPlace = currentPlace else {
-            return
-        }
-        
-        setupNavigationBar()
-        
-        placeName.text = currentPlace.name
-        placeLocation.text = currentPlace.location
-        placeType.text = currentPlace.type
-        cosmosView.rating = currentPlace.rating
-        
-        if let data = currentPlace.imageData, let image = UIImage(data: data) {
-            placeImage.image = image
-            placeImage.contentMode = .scaleAspectFill
-            imagePicked = true
-        }
-    }
-    
-    private func setupNavigationBar() {
-        
-        if let topItem = navigationController?.navigationBar.topItem {
-            topItem.backButtonTitle = ""
-        }
-        
-        navigationItem.leftBarButtonItem = nil
-        title = currentPlace?.name
-        saveButton.isEnabled = true
     }
 }
 
@@ -187,5 +125,76 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
 extension NewPlaceViewController: MapViewControllerDelegate {
     func setUpAddress(address: String?) {
         placeLocation.text = address
+    }
+}
+
+// MARK: - Private methods
+extension NewPlaceViewController {
+    
+    private func setupEditScreen() {
+        guard let editedPlace = editedPlace else {
+            return
+        }
+        
+        setupNavigationBar()
+        
+        placeName.text = editedPlace.name
+        placeLocation.text = editedPlace.location
+        placeType.text = editedPlace.type
+        ratingView.rating = editedPlace.rating
+        
+        if let imageData = editedPlace.imageData, let image = UIImage(data: imageData) {
+            placeImage.image = image
+            placeImage.contentMode = .scaleAspectFill
+            imagePicked = true
+        }
+    }
+    
+    private func setupNavigationBar() {
+        if let topItem = navigationController?.navigationBar.topItem {
+            topItem.backButtonTitle = ""
+        }
+        
+        navigationItem.leftBarButtonItem = nil
+        title = editedPlace?.name
+        saveButton.isEnabled = true
+    }
+    
+    private func showImageActionsSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.chooseImagePicker(source: .camera)
+        }
+        camera.setValue(UIImage(named: "camera"), forKey: "image")
+        
+        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            self.chooseImagePicker(source: .photoLibrary)
+        }
+        photo.setValue(UIImage(named: "photo"), forKey: "image")
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photo)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true)
+    }
+    
+    private func savePlace() {
+        let image = imagePicked ? placeImage.image : UIImage(named: "imagePlaceholder")
+
+        let newPlace = Place(name: placeName.text ?? "",
+                             location: placeLocation.text,
+                             type: placeType.text,
+                             imageData: image?.pngData(),
+                             rating: ratingView.rating)
+        
+        if let currentPlace = editedPlace {
+            StorageManager.shared.updateObject(currentPlace, with: newPlace)
+        } else {
+            StorageManager.shared.saveObject(newPlace)
+        }
     }
 }
