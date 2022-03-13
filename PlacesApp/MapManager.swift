@@ -111,7 +111,6 @@ class MapManager {
         }
     }
     
-    
     private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else {
             return nil
