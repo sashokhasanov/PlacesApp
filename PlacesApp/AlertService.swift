@@ -25,7 +25,8 @@ extension AlertSevice {
     enum PredefinedAlertType {
         case locationServicesUnavailable
         case locationAccessDenied
-        case locationNotFound
+        case placeLocationNotFound
+        case userLocationNotFound
         case failedToBuildRoute
     }
     
@@ -35,17 +36,20 @@ extension AlertSevice {
         
         switch type {
         case .locationServicesUnavailable:
-            title = "Location services are disabled"
-            message = "Please enable location services"
+            title = "😥 Сервисы геолокации отключены"
+            message = "Включите сервисы геолокации в настройках"
         case .locationAccessDenied:
-            title = "Error"
-            message = "Please allow to use location"
-        case .locationNotFound:
-            title = "Error"
-            message = "Location can't be found"
+            title = "😥 Доступ к геопозиции отключен"
+            message = "Разрешите приложению доступ к геопозиции"
+        case .placeLocationNotFound:
+            title = "😥 Ошибка"
+            message = "Не удалось определить адрес"
+        case .userLocationNotFound:
+            title = "😥 Ошибка"
+            message = "Не удалось определить вашу геопозицию"
         case .failedToBuildRoute:
-            title = "Error"
-            message = "Failed to build route"
+            title = "😥 Ошибка"
+            message = "Не удалось построить маршрут"
         }
         
         if !message.isEmpty || !title.isEmpty {

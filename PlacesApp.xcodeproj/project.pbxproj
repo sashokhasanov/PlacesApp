@@ -401,6 +401,9 @@
 				DEVELOPMENT_TEAM = HUN84826YQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlacesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -432,6 +435,9 @@
 				DEVELOPMENT_TEAM = HUN84826YQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlacesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -25,7 +25,7 @@ class MapManager {
         
         geoCoder.geocodeAddressString(placeLocation) { placemarks, error in
             guard error == nil else {
-                print(error as Any)
+                AlertSevice.shared.showPredefinedAlert(type: .placeLocationNotFound)
                 return
             }
             
@@ -64,7 +64,7 @@ class MapManager {
     func showUserLocation(mapView: MKMapView) {
         
         guard let location = locationManager.location?.coordinate else {
-            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
+            AlertSevice.shared.showPredefinedAlert(type: .userLocationNotFound)
             return
         }
         
@@ -78,7 +78,7 @@ class MapManager {
     func getDirections(for mapView: MKMapView) {
         
         guard let coordinate = locationManager.location?.coordinate else {
-            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
+            AlertSevice.shared.showPredefinedAlert(type: .placeLocationNotFound)
             return
         }
         

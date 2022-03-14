@@ -57,7 +57,7 @@
                                         </stackView>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="90" placeholderIntrinsicHeight="14" translatesAutoresizingMaskIntoConstraints="NO" id="5Dz-3z-b22" customClass="CosmosView" customModule="Cosmos">
                                             <rect key="frame" x="304" y="35.5" width="90" height="14"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="jEv-SB-QlX"/>
                                             </constraints>
@@ -126,7 +126,7 @@
             </objects>
             <point key="canvasLocation" x="262.31884057971018" y="421.875"/>
         </scene>
-        <!--New place-->
+        <!--Новое место-->
         <scene sceneID="t5s-q8-sxh">
             <objects>
                 <tableViewController id="PXK-gq-ncq" customClass="NewPlaceViewController" customModule="PlacesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -339,7 +339,7 @@
                             <outlet property="delegate" destination="PXK-gq-ncq" id="zME-x8-RRP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New place" largeTitleDisplayMode="always" id="7KO-RX-tql">
+                    <navigationItem key="navigationItem" title="Новое место" largeTitleDisplayMode="always" id="7KO-RX-tql">
                         <barButtonItem key="leftBarButtonItem" title="Отменить" id="aYR-BT-U7I">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="PXK-gq-ncq" id="xEQ-OJ-iM0"/>
@@ -602,7 +602,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="KAf-oU-ose"/>
-        <segue reference="uV2-1Q-2hz"/>
+        <segue reference="5io-eY-ost"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
