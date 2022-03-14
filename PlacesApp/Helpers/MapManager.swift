@@ -81,13 +81,12 @@ class MapManager {
             return
         }
         
-        locationManager.startUpdatingLocation()
-        mapView.userTrackingMode = .follow
-
         guard let request = createDirectionsRequest(from: coordinate) else {
             AlertSevice.shared.showPredefinedAlert(type: .failedToBuildRoute)
             return
         }
+        
+        locationManager.startUpdatingLocation()
         
         let directions = MKDirections(request: request)
         self.directions.append(directions)
@@ -95,11 +94,13 @@ class MapManager {
         directions.calculate { response, error in
             if let error = error {
                 print(error)
+                self.locationManager.stopUpdatingLocation()
                 return
             }
             
             guard let response = response else {
                 AlertSevice.shared.showPredefinedAlert(type: .failedToBuildRoute)
+                self.locationManager.stopUpdatingLocation()
                 return
             }
             
@@ -108,6 +109,7 @@ class MapManager {
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
             
+            mapView.userTrackingMode = .follow
             completion()
         }
     }
