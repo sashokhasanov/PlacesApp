@@ -111,17 +111,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My places" largeTitleDisplayMode="never" id="f5R-qM-GSp">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.up" catalog="system" id="apy-Vd-OcD">
-                            <connections>
-                                <action selector="reverseSortingDirection:" destination="Gi5-2q-8jx" id="6C1-8A-dyT"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="cNj-fB-ZwB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xef-5a-Dl6">
                             <connections>
                                 <segue destination="JGx-Xc-ZT2" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="jXe-3c-Nvf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="sortButtonItem" destination="cNj-fB-ZwB" id="jMQ-4r-A0n"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egt-tV-dsc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -607,7 +606,6 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
-        <image name="arrow.up" catalog="system" width="120" height="128"/>
         <image name="car.fill" catalog="system" width="128" height="93"/>
         <image name="location.circle.fill" catalog="system" width="128" height="121"/>
         <image name="map" width="50" height="50"/>

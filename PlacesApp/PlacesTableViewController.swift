@@ -9,19 +9,22 @@ import UIKit
 import RealmSwift
 
 class PlacesTableViewController: UITableViewController {
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var sortButtonItem: UIBarButtonItem!
 
     // MARK: - Private properties
     private var places: Results<Place>!
     private var filteredPlaces: Results<Place>!
     
     private var searchController = UISearchController()
-    private var ascendingSorting = true
+    private var orderBy = OrderBy.name
     
     private var isFiltering: Bool {
         searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
     
-    private var notificationToken: NotificationToken?
+    private var notificationTokens: [NotificationToken] = []
     
     // MARK: - Override methods
     override func viewDidLoad() {
@@ -29,17 +32,12 @@ class PlacesTableViewController: UITableViewController {
         places = StorageManager.shared.realm.objects(Place.self)
         
         setupSearchController()
-        observePlacesChanges()
-    }
-    
-    //MARK: - IBActions
-    @IBAction func reverseSortingDirection(_ sender: UIBarButtonItem) {
-        ascendingSorting.toggle()
-        sender.image = UIImage(systemName: ascendingSorting ? "arrow.up" : "arrow.down")
-        sortPlaces()
+        setupOrderItem()
+        
+        setupDbChangesObserver()
     }
 }
-    
+
 // MARK: - Table view data source
 extension PlacesTableViewController {
     
@@ -103,25 +101,21 @@ extension PlacesTableViewController {
 extension PlacesTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard isFiltering else {
-            return
-        }
 
         let searchText = searchController.searchBar.text ?? ""
-        filteredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText)
+        
+        filteredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
         tableView.reloadData()
     }
 }
 
-// MARK: - UISearchBarDelegate
-extension PlacesTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        sortPlaces()
-    }
-}
 
-// MARK: - Private methods
-extension PlacesTableViewController {
+// MARK: - Search
+extension PlacesTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        orderPlaces()
+    }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -129,30 +123,77 @@ extension PlacesTableViewController {
         
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Enter place name or location"
-        
-        searchController.searchBar.scopeButtonTitles = ["Date", "Name"]
-        searchController.searchBar.showsScopeBar = true
 
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
         definesPresentationContext = true
     }
+}
+
+// MARK: - Ordering
+extension PlacesTableViewController {
     
-    private func sortPlaces() {
-        let sortingKeyPath =
-            searchController.searchBar.selectedScopeButtonIndex == 0 ? "date" : "name"
+    private func setupOrderItem() {
         
-        places = places.sorted(byKeyPath: sortingKeyPath, ascending: ascendingSorting)
+        let byDate = UIAction(title: "By date", identifier: UIAction.Identifier(OrderBy.date.rawValue), state: .on) { _ in
+            self.orderBy = .date
+            self.updateState(for: self.sortButtonItem.menu)
+            self.orderPlaces()
+        }
+        
+        let byName = UIAction(title: "By name", identifier: UIAction.Identifier(OrderBy.name.rawValue), state: .off) { _ in
+            self.orderBy = .name
+            self.updateState(for: self.sortButtonItem.menu)
+            self.orderPlaces()
+        }
+        
+        let menu = UIMenu(title: "", options: .displayInline, children: [byDate, byName])
+        sortButtonItem.menu = menu
+        sortButtonItem.primaryAction = nil
+    }
+    
+    private func updateState(for menu: UIMenu?) {
+        guard let menu = menu else {
+            return
+        }
+        
+        menu.children.forEach { action in
+            guard let action = action as? UIAction else {
+                return
+            }
+            
+            if action.identifier == UIAction.Identifier(self.orderBy.rawValue) {
+                action.state = .on
+            } else {
+                action.state = .off
+            }
+        }
+    }
+    
+    private func orderPlaces() {
+        places = places.sorted(byKeyPath: orderBy.rawValue)
         tableView.reloadData()
     }
     
-    private func observePlacesChanges() {
-        notificationToken = places.observe { changes in
+    private enum OrderBy: String {
+        case date
+        case name
+    }
+}
+
+// MARK: - Observing DB changes
+extension PlacesTableViewController {
+
+    private func setupDbChangesObserver() {
+        let notificationTokenPlaces = places.observe { changes in
+
+            guard !self.isFiltering else {
+                return
+            }
+
             switch changes {
             case .initial:
                 self.tableView.reloadData()
-                
+
             case .update(_, let deletions, let insertions, let modifications):
                 self.tableView.performBatchUpdates {
                     // ! Always apply updates in the following order: deletions, insertions, then modifications.
@@ -161,10 +202,38 @@ extension PlacesTableViewController {
                     self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
                     self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
                 }
-                
+
             case .error(let error):
                 print(error)
             }
         }
+        notificationTokens.append(notificationTokenPlaces)
+
+
+        let notificationTokenPlacesFiltered = filteredPlaces.observe { changes in
+
+            guard self.isFiltering else {
+                return
+            }
+
+            switch changes {
+            case .initial:
+                self.tableView.reloadData()
+
+            case .update(_, let deletions, let insertions, let modifications):
+                self.tableView.performBatchUpdates {
+                    // ! Always apply updates in the following order: deletions, insertions, then modifications.
+                    // Handling insertions before deletions may result in unexpected behavior.
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                }
+
+            case .error(let error):
+                print(error)
+            }
+        }
+
+        notificationTokens.append(notificationTokenPlacesFiltered)
     }
 }
