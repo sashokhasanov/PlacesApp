@@ -16,7 +16,7 @@
 		2DAB3F8227C90C7400CAD4E2 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */; };
 		2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */; };
 		2DAB3FA627CCFC2200CAD4E2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA527CCFC2200CAD4E2 /* Place.swift */; };
-		2DAB3FA827CD710B00CAD4E2 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */; };
+		2DAB3FA827CD710B00CAD4E2 /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA727CD710A00CAD4E2 /* PlaceDetailsViewController.swift */; };
 		2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3127D8FCC000379F87 /* MapViewController.swift */; };
 		2DAEEA3427DA428200379F87 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3327DA428200379F87 /* MapManager.swift */; };
 		2DAEEA3627DB555900379F87 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3527DB555900379F87 /* AlertService.swift */; };
@@ -38,7 +38,7 @@
 		2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		2DAB3FA527CCFC2200CAD4E2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
+		2DAB3FA727CD710A00CAD4E2 /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
 		2DAEEA3127D8FCC000379F87 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2DAEEA3327DA428200379F87 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		2DAEEA3527DB555900379F87 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		2D1E724E27DF769D00C51F99 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */,
+				2DAB3FA727CD710A00CAD4E2 /* PlaceDetailsViewController.swift */,
 				2DAEEA3127D8FCC000379F87 /* MapViewController.swift */,
 				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
 			);
@@ -311,7 +311,7 @@
 				2DAEEA3A27DBD02500379F87 /* UIViewController+visibleController.swift in Sources */,
 				2DAEEA3627DB555900379F87 /* AlertService.swift in Sources */,
 				2DAB3F6E27C909B100CAD4E2 /* AppDelegate.swift in Sources */,
-				2DAB3FA827CD710B00CAD4E2 /* NewPlaceViewController.swift in Sources */,
+				2DAB3FA827CD710B00CAD4E2 /* PlaceDetailsViewController.swift in Sources */,
 				2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */,
 				2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */,
 				2DAEEA3827DBCFAA00379F87 /* UIApplication+topMostViewController.swift in Sources */,

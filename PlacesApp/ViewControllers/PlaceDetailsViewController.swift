@@ -8,8 +8,7 @@
 import UIKit
 import Cosmos
 
-class NewPlaceViewController: UITableViewController {
-
+class PlaceDetailsViewController: UITableViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
@@ -42,7 +41,7 @@ class NewPlaceViewController: UITableViewController {
 }
 
 // MARK: - Navigation
-extension NewPlaceViewController {
+extension PlaceDetailsViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segueId = segue.identifier, let mapViewController = segue.destination as? MapViewController else {
@@ -65,7 +64,7 @@ extension NewPlaceViewController {
 }
 
 // MARK: - Table view delegate
-extension NewPlaceViewController {
+extension PlaceDetailsViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
@@ -85,7 +84,7 @@ extension NewPlaceViewController {
 }
 
 // MARK: - Text field delegate
-extension NewPlaceViewController: UITextFieldDelegate {
+extension PlaceDetailsViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -98,7 +97,7 @@ extension NewPlaceViewController: UITextFieldDelegate {
 }
 
 // MARK: - Image processing
-extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PlaceDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {
@@ -121,14 +120,14 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
 }
 
 // MARK: - MapViewControllerDelegate
-extension NewPlaceViewController: MapViewControllerDelegate {
+extension PlaceDetailsViewController: MapViewControllerDelegate {
     func setUpAddress(address: String?) {
         placeLocation.text = address
     }
 }
 
 // MARK: - Private methods
-extension NewPlaceViewController {
+extension PlaceDetailsViewController {
     
     private func setupEditScreen() {
         guard let editedPlace = editedPlace else {

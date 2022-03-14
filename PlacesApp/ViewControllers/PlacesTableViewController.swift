@@ -80,7 +80,7 @@ extension PlacesTableViewController {
             return
         }
         
-        guard let targetVieController = segue.destination as? NewPlaceViewController else {
+        guard let targetVieController = segue.destination as? PlaceDetailsViewController else {
             return
         }
         
