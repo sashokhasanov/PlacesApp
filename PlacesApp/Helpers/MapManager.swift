@@ -86,6 +86,10 @@ class MapManager {
             return
         }
         
+        guard directions.isEmpty else {
+            return
+        }
+        
         locationManager.startUpdatingLocation()
         
         let directions = MKDirections(request: request)
