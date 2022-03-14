@@ -65,9 +65,9 @@
 		2D1E724E27DF769D00C51F99 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
 				2DAB3FA727CD710A00CAD4E2 /* PlaceDetailsViewController.swift */,
 				2DAEEA3127D8FCC000379F87 /* MapViewController.swift */,
-				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
