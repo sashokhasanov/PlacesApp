@@ -208,32 +208,5 @@ extension PlacesTableViewController {
             }
         }
         notificationTokens.append(notificationTokenPlaces)
-
-
-        let notificationTokenPlacesFiltered = filteredPlaces.observe { changes in
-
-            guard self.isFiltering else {
-                return
-            }
-
-            switch changes {
-            case .initial:
-                self.tableView.reloadData()
-
-            case .update(_, let deletions, let insertions, let modifications):
-                self.tableView.performBatchUpdates {
-                    // ! Always apply updates in the following order: deletions, insertions, then modifications.
-                    // Handling insertions before deletions may result in unexpected behavior.
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                }
-
-            case .error(let error):
-                print(error)
-            }
-        }
-
-        notificationTokens.append(notificationTokenPlacesFiltered)
     }
 }
