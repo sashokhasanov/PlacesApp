@@ -16,13 +16,13 @@
 		2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */; };
 		2DAB3FA627CCFC2200CAD4E2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA527CCFC2200CAD4E2 /* Place.swift */; };
 		2DAB3FA827CD710B00CAD4E2 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */; };
-		2DAB3FAA27CE575800CAD4E2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA927CE575800CAD4E2 /* StorageManager.swift */; };
+		2DAB3FAA27CE575800CAD4E2 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA927CE575800CAD4E2 /* StorageService.swift */; };
 		2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3127D8FCC000379F87 /* MapViewController.swift */; };
 		2DAEEA3427DA428200379F87 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3327DA428200379F87 /* MapManager.swift */; };
 		2DAEEA3627DB555900379F87 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3527DB555900379F87 /* AlertService.swift */; };
 		2DAEEA3827DBCFAA00379F87 /* UIApplication+topMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3727DBCFA900379F87 /* UIApplication+topMostViewController.swift */; };
 		2DAEEA3A27DBD02500379F87 /* UIViewController+visibleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3927DBD02500379F87 /* UIViewController+visibleController.swift */; };
-		2DAEEA3C27DE047D00379F87 /* Data manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3B27DE047D00379F87 /* Data manager.swift */; };
+		2DAEEA3C27DE047D00379F87 /* TempDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3B27DE047D00379F87 /* TempDataService.swift */; };
 		5C3815B8AD5482E320C0FC3A /* Pods_PlacesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717E8EEE54D1B758AC784A1E /* Pods_PlacesApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,13 +38,13 @@
 		2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		2DAB3FA527CCFC2200CAD4E2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
-		2DAB3FA927CE575800CAD4E2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		2DAB3FA927CE575800CAD4E2 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		2DAEEA3127D8FCC000379F87 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2DAEEA3327DA428200379F87 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		2DAEEA3527DB555900379F87 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		2DAEEA3727DBCFA900379F87 /* UIApplication+topMostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topMostViewController.swift"; sourceTree = "<group>"; };
 		2DAEEA3927DBD02500379F87 /* UIViewController+visibleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+visibleController.swift"; sourceTree = "<group>"; };
-		2DAEEA3B27DE047D00379F87 /* Data manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data manager.swift"; sourceTree = "<group>"; };
+		2DAEEA3B27DE047D00379F87 /* TempDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempDataService.swift; sourceTree = "<group>"; };
 		2FA7DCC3A55BD27E58E322D6 /* Pods-PlacesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesApp.debug.xcconfig"; path = "Target Support Files/Pods-PlacesApp/Pods-PlacesApp.debug.xcconfig"; sourceTree = "<group>"; };
 		717E8EEE54D1B758AC784A1E /* Pods_PlacesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC345ED9A2BED78D98C226 /* Pods-PlacesApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacesApp.release.xcconfig"; path = "Target Support Files/Pods-PlacesApp/Pods-PlacesApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,8 +86,8 @@
 				2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */,
 				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
 				2DAB3FA527CCFC2200CAD4E2 /* Place.swift */,
-				2DAEEA3B27DE047D00379F87 /* Data manager.swift */,
-				2DAB3FA927CE575800CAD4E2 /* StorageManager.swift */,
+				2DAEEA3B27DE047D00379F87 /* TempDataService.swift */,
+				2DAB3FA927CE575800CAD4E2 /* StorageService.swift */,
 				2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */,
 				2DAB3F7327C909B100CAD4E2 /* Main.storyboard */,
 				2DAEEA3127D8FCC000379F87 /* MapViewController.swift */,
@@ -243,8 +243,8 @@
 				2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */,
 				2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */,
 				2DAEEA3827DBCFAA00379F87 /* UIApplication+topMostViewController.swift in Sources */,
-				2DAB3FAA27CE575800CAD4E2 /* StorageManager.swift in Sources */,
-				2DAEEA3C27DE047D00379F87 /* Data manager.swift in Sources */,
+				2DAB3FAA27CE575800CAD4E2 /* StorageService.swift in Sources */,
+				2DAEEA3C27DE047D00379F87 /* TempDataService.swift in Sources */,
 				2DAEEA3427DA428200379F87 /* MapManager.swift in Sources */,
 				2DAB3F8227C90C7400CAD4E2 /* PlacesTableViewController.swift in Sources */,
 				2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */,

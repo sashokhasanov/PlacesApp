@@ -8,7 +8,6 @@
 import RealmSwift
 
 class Place: Object {
-    
     @Persisted var name = ""
     @Persisted var location: String?
     @Persisted var type: String?

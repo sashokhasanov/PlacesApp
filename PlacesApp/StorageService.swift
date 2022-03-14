@@ -7,14 +7,16 @@
 
 import RealmSwift
 
-class StorageManager {
-    
-    static let shared = StorageManager()
+class StorageService {
+    // MARK: - Internal properties
+    static let shared = StorageService()
     
     let realm = try! Realm()
     
+    // MARK: - Initializers
     private init() {}
     
+    // MARK: - Internal methods
     func saveObjects(_ places: [Place]) {
         write {
             realm.add(places)
@@ -43,6 +45,7 @@ class StorageManager {
         }
     }
     
+    // MARK: - Private methods
     private func write(completion: () -> Void) {
         do {
             try realm.write {

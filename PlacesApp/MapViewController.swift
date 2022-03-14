@@ -61,12 +61,21 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func routeButtonPressed() {
-        mapManager.getDirections(for: mapView)
+        mapManager.getDirections(for: mapView) {
+            self.routeButton.isHidden = true
+            self.clearRouteButton.isHidden = false
+        }
+    }
+    
+    @IBAction func clearRouteButtonPressed() {
+        mapManager.resetMapView(for: mapView) {
+            self.routeButton.isHidden = false
+            self.clearRouteButton.isHidden = true
+        }
     }
     
     //  MARK: - Private methods
     private func setupViewController() {
-        
         if controllerMode == .showPlace {
             routeButton.isHidden = false
         } else {
@@ -121,7 +130,6 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
         guard controllerMode == .getAddress else {
             return
         }
@@ -175,20 +183,17 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         guard let error = error as? CLError else {
+            print(error)
             return
         }
-        
-        manager.stopUpdatingLocation()
-        
+
         switch error.code {
         case CLError.Code.locationUnknown:
             AlertSevice.shared.showPredefinedAlert(type: .userLocationNotFound)
         case CLError.Code.denied:
             AlertSevice.shared.showPredefinedAlert(type: .locationAccessDenied)
         default:
-            print("Location manager error: \(error.localizedDescription)")
+            print(error)
         }
     }
 }
-
-

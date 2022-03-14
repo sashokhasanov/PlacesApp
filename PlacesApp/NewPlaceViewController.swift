@@ -191,9 +191,9 @@ extension NewPlaceViewController {
                              rating: ratingView.rating)
         
         if let currentPlace = editedPlace {
-            StorageManager.shared.updateObject(currentPlace, with: newPlace)
+            StorageService.shared.updateObject(currentPlace, with: newPlace)
         } else {
-            StorageManager.shared.saveObject(newPlace)
+            StorageService.shared.saveObject(newPlace)
         }
     }
 }

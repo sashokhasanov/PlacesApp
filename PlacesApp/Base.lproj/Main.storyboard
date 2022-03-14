@@ -514,7 +514,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="routeButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="lBv-1p-J29"/>
+                                    <action selector="clearRouteButtonPressed" destination="pib-3P-ixs" eventType="touchUpInside" id="LEZ-Ay-FYV"/>
                                 </connections>
                             </button>
                         </subviews>

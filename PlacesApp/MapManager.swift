@@ -10,12 +10,15 @@ import MapKit
 
 class MapManager {
     
+    // MARK: - Internal properties
     let locationManager = CLLocationManager()
     
+    // MARK: - Private properties
     private let regionDeltaMeters = 1000.0
     private var directions: [MKDirections] = []
     private var placeCoordinate: CLLocationCoordinate2D?
 
+    // MARK: - Internal methods
     func setupPlacemark(place: Place, mapView: MKMapView) {
         guard let placeLocation = place.location else {
             return
@@ -46,7 +49,6 @@ class MapManager {
     }
     
     func attemptLocationAccess(managerSetup: () -> Void) {
-        
         guard CLLocationManager.locationServicesEnabled() else {
             AlertSevice.shared.showPredefinedAlert(type: .locationServicesUnavailable)
             return
@@ -62,7 +64,6 @@ class MapManager {
     }
     
     func showUserLocation(mapView: MKMapView) {
-        
         guard let location = locationManager.location?.coordinate else {
             AlertSevice.shared.showPredefinedAlert(type: .userLocationNotFound)
             return
@@ -75,8 +76,7 @@ class MapManager {
         mapView.setRegion(region, animated: true)
     }
 
-    func getDirections(for mapView: MKMapView) {
-        
+    func getDirections(for mapView: MKMapView, completion: @escaping () -> Void) {
         guard let coordinate = locationManager.location?.coordinate else {
             AlertSevice.shared.showPredefinedAlert(type: .placeLocationNotFound)
             return
@@ -91,7 +91,7 @@ class MapManager {
         }
         
         let directions = MKDirections(request: request)
-        resetMapView(with: directions, mapView: mapView)
+        self.directions.append(directions)
         
         directions.calculate { response, error in
             if let error = error {
@@ -108,9 +108,32 @@ class MapManager {
                 mapView.addOverlay(route.polyline)
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
+            
+            completion()
         }
     }
     
+    func resetMapView(for mapView: MKMapView, completion: () -> Void) {
+        mapView.userTrackingMode = .none
+        mapView.removeOverlays(mapView.overlays)
+        
+        directions.forEach { $0.cancel() }
+        directions.removeAll()
+        
+        locationManager.stopUpdatingLocation()
+        showUserLocation(mapView: mapView)
+        
+        completion()
+    }
+    
+    func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        let latitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.longitude
+        
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    // MARK: - Private methods
     private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else {
             return nil
@@ -126,20 +149,5 @@ class MapManager {
         request.requestsAlternateRoutes = false
         
         return request
-    }
-    
-    func getCenterLocation(for mapView: MKMapView) -> CLLocation {
-        let latitude = mapView.centerCoordinate.latitude
-        let longitude = mapView.centerCoordinate.longitude
-        
-        return CLLocation(latitude: latitude, longitude: longitude)
-    }
-    
-    private func resetMapView(with newDirections: MKDirections, mapView: MKMapView) {
-        mapView.removeOverlays(mapView.overlays)
-        let _ = directions.map { $0.cancel() }
-        directions.removeAll()
-        
-        directions.append(newDirections)
     }
 }

@@ -9,7 +9,6 @@ import UIKit
 import RealmSwift
 
 class PlacesTableViewController: UITableViewController {
-    
     // MARK: - IBOutlets
     @IBOutlet weak var sortButtonItem: UIBarButtonItem!
 
@@ -27,12 +26,12 @@ class PlacesTableViewController: UITableViewController {
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        places = StorageManager.shared.realm.objects(Place.self)
+        places = StorageService.shared.realm.objects(Place.self)
         
         setupSearchController()
         setupOrderItem()
         
-        DataManager.shared.createTempData {
+        TempDataService.shared.createTempData {
             self.tableView.reloadData()
         }
     }
@@ -62,11 +61,10 @@ extension PlacesTableViewController {
     
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { _, _, _ in
-            StorageManager.shared.deleteObject(place)
+            StorageService.shared.deleteObject(place)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         
@@ -78,7 +76,6 @@ extension PlacesTableViewController {
 extension PlacesTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         guard segue.identifier == "showDetails" else {
             return
         }
@@ -131,7 +128,6 @@ extension PlacesTableViewController: UISearchBarDelegate {
 extension PlacesTableViewController {
     
     private func setupOrderItem() {
-        
         let byDate = UIAction(title: "По дате", identifier: UIAction.Identifier(OrderBy.date.rawValue), state: .on) { _ in
             self.orderBy = .date
             self.updateState(for: self.sortButtonItem.menu)
