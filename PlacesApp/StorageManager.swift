@@ -15,6 +15,12 @@ class StorageManager {
     
     private init() {}
     
+    func saveObjects(_ places: [Place]) {
+        write {
+            realm.add(places)
+        }
+    }
+    
     func saveObject(_ place: Place) {
         write {
             realm.add(place)

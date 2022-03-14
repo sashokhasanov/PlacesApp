@@ -31,6 +31,10 @@ class PlacesTableViewController: UITableViewController {
         
         setupSearchController()
         setupOrderItem()
+        
+        DataManager.shared.createTempData {
+            self.tableView.reloadData()
+        }
     }
 }
 
