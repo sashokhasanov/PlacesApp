@@ -162,17 +162,17 @@ extension NewPlaceViewController {
     private func showImageActionsSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+        let camera = UIAlertAction(title: "Сделать фото", style: .default) { _ in
             self.chooseImagePicker(source: .camera)
         }
         camera.setValue(UIImage(named: "camera"), forKey: "image")
         
-        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+        let photo = UIAlertAction(title: "Выбрать фото", style: .default) { _ in
             self.chooseImagePicker(source: .photoLibrary)
         }
         photo.setValue(UIImage(named: "photo"), forKey: "image")
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
         
         actionSheet.addAction(camera)
         actionSheet.addAction(photo)

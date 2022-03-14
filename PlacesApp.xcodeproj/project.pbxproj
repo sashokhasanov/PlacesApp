@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D1E724D27DF768500C51F99 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1E724C27DF768500C51F99 /* StorageService.swift */; };
 		2DAB3F6E27C909B100CAD4E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */; };
 		2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */; };
 		2DAB3F7527C909B100CAD4E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3F7327C909B100CAD4E2 /* Main.storyboard */; };
@@ -16,7 +17,6 @@
 		2DAB3FA427CCEE0200CAD4E2 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */; };
 		2DAB3FA627CCFC2200CAD4E2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA527CCFC2200CAD4E2 /* Place.swift */; };
 		2DAB3FA827CD710B00CAD4E2 /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */; };
-		2DAB3FAA27CE575800CAD4E2 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB3FA927CE575800CAD4E2 /* StorageService.swift */; };
 		2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3127D8FCC000379F87 /* MapViewController.swift */; };
 		2DAEEA3427DA428200379F87 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3327DA428200379F87 /* MapManager.swift */; };
 		2DAEEA3627DB555900379F87 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAEEA3527DB555900379F87 /* AlertService.swift */; };
@@ -27,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D1E724C27DF768500C51F99 /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		2DAB3F6A27C909B100CAD4E2 /* PlacesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		2DAB3FA527CCFC2200CAD4E2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
-		2DAB3FA927CE575800CAD4E2 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		2DAEEA3127D8FCC000379F87 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2DAEEA3327DA428200379F87 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		2DAEEA3527DB555900379F87 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -62,6 +62,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D1E724E27DF769D00C51F99 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */,
+				2DAEEA3127D8FCC000379F87 /* MapViewController.swift */,
+				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2D1E724F27DF76C200C51F99 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3FA527CCFC2200CAD4E2 /* Place.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2D1E725027DF76CF00C51F99 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2D1E725227DF77BC00C51F99 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3F7627C909B700CAD4E2 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2D1E725327DF77C900C51F99 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */,
+				2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */,
+			);
+			path = Startup;
+			sourceTree = "<group>";
+		};
+		2D1E725427DF77E500C51F99 /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3F7B27C909B700CAD4E2 /* Info.plist */,
+			);
+			path = "Support files";
+			sourceTree = "<group>";
+		};
 		2DAB3F6127C909B100CAD4E2 = {
 			isa = PBXGroup;
 			children = (
@@ -83,25 +134,46 @@
 		2DAB3F6C27C909B100CAD4E2 /* PlacesApp */ = {
 			isa = PBXGroup;
 			children = (
-				2DAB3F6D27C909B100CAD4E2 /* AppDelegate.swift */,
-				2DAB3F8127C90C7400CAD4E2 /* PlacesTableViewController.swift */,
-				2DAB3FA527CCFC2200CAD4E2 /* Place.swift */,
-				2DAEEA3B27DE047D00379F87 /* TempDataService.swift */,
-				2DAB3FA927CE575800CAD4E2 /* StorageService.swift */,
-				2DAB3F6F27C909B100CAD4E2 /* SceneDelegate.swift */,
-				2DAB3F7327C909B100CAD4E2 /* Main.storyboard */,
-				2DAEEA3127D8FCC000379F87 /* MapViewController.swift */,
-				2DAEEA3327DA428200379F87 /* MapManager.swift */,
-				2DAEEA3527DB555900379F87 /* AlertService.swift */,
-				2DAEEA3727DBCFA900379F87 /* UIApplication+topMostViewController.swift */,
-				2DAEEA3927DBD02500379F87 /* UIViewController+visibleController.swift */,
-				2DAB3FA727CD710A00CAD4E2 /* NewPlaceViewController.swift */,
-				2DAB3FA327CCEE0200CAD4E2 /* PlaceCell.swift */,
-				2DAB3F7627C909B700CAD4E2 /* Assets.xcassets */,
-				2DAB3F7827C909B700CAD4E2 /* LaunchScreen.storyboard */,
-				2DAB3F7B27C909B700CAD4E2 /* Info.plist */,
+				2D1E725427DF77E500C51F99 /* Support files */,
+				2D1E725327DF77C900C51F99 /* Startup */,
+				2D1E725227DF77BC00C51F99 /* Resources */,
+				2D1E725027DF76CF00C51F99 /* Views */,
+				2D1E724F27DF76C200C51F99 /* Models */,
+				2D1E724E27DF769D00C51F99 /* ViewControllers */,
+				2DAEEA4327DF751100379F87 /* Helpers */,
+				2DAEEA4227DF74E800379F87 /* Extensions */,
+				2DAEEA4127DF74B500379F87 /* Storyboards */,
 			);
 			path = PlacesApp;
+			sourceTree = "<group>";
+		};
+		2DAEEA4127DF74B500379F87 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2DAB3F7327C909B100CAD4E2 /* Main.storyboard */,
+				2DAB3F7827C909B700CAD4E2 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2DAEEA4227DF74E800379F87 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2DAEEA3927DBD02500379F87 /* UIViewController+visibleController.swift */,
+				2DAEEA3727DBCFA900379F87 /* UIApplication+topMostViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2DAEEA4327DF751100379F87 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2D1E724C27DF768500C51F99 /* StorageService.swift */,
+				2DAEEA3B27DE047D00379F87 /* TempDataService.swift */,
+				2DAEEA3527DB555900379F87 /* AlertService.swift */,
+				2DAEEA3327DA428200379F87 /* MapManager.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		31DE7A5C035E00B1277C91B9 /* Frameworks */ = {
@@ -243,7 +315,7 @@
 				2DAB3F7027C909B100CAD4E2 /* SceneDelegate.swift in Sources */,
 				2DAEEA3227D8FCC000379F87 /* MapViewController.swift in Sources */,
 				2DAEEA3827DBCFAA00379F87 /* UIApplication+topMostViewController.swift in Sources */,
-				2DAB3FAA27CE575800CAD4E2 /* StorageService.swift in Sources */,
+				2D1E724D27DF768500C51F99 /* StorageService.swift in Sources */,
 				2DAEEA3C27DE047D00379F87 /* TempDataService.swift in Sources */,
 				2DAEEA3427DA428200379F87 /* MapManager.swift in Sources */,
 				2DAB3F8227C90C7400CAD4E2 /* PlacesTableViewController.swift in Sources */,
@@ -400,7 +472,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HUN84826YQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlacesApp/Info.plist;
+				INFOPLIST_FILE = "PlacesApp/Support files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";
@@ -434,7 +506,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HUN84826YQ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PlacesApp/Info.plist;
+				INFOPLIST_FILE = "PlacesApp/Support files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";

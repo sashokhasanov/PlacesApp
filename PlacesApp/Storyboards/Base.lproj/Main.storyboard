@@ -440,10 +440,10 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hby-Kx-ycK">
-                                <rect key="frame" x="148" y="772" width="118" height="50"/>
+                                <rect key="frame" x="139" y="772" width="136" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Done">
+                                <buttonConfiguration key="configuration" style="plain" title="Готово">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                     <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

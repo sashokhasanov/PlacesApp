@@ -9,7 +9,6 @@ import Foundation
 import MapKit
 
 class MapManager {
-    
     // MARK: - Internal properties
     let locationManager = CLLocationManager()
     

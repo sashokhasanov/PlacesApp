@@ -9,7 +9,6 @@ import UIKit
 import Cosmos
 
 class PlaceCell: UITableViewCell {
-    
     // MARK: - reuse identifier
     static let reuseId = "PlaceCell"
     
