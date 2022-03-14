@@ -182,7 +182,7 @@ extension MapViewController: CLLocationManagerDelegate {
         
         switch error.code {
         case CLError.Code.locationUnknown:
-            AlertSevice.shared.showPredefinedAlert(type: .locationNotFound)
+            AlertSevice.shared.showPredefinedAlert(type: .userLocationNotFound)
         case CLError.Code.denied:
             AlertSevice.shared.showPredefinedAlert(type: .locationAccessDenied)
         default:
