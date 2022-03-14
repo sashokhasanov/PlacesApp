@@ -23,9 +23,7 @@ class PlacesTableViewController: UITableViewController {
     private var isFiltering: Bool {
         searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
-    
-    private var notificationTokens: [NotificationToken] = []
-    
+
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +31,6 @@ class PlacesTableViewController: UITableViewController {
         
         setupSearchController()
         setupOrderItem()
-        
-        setupDbChangesObserver()
     }
 }
 
@@ -67,6 +63,7 @@ extension PlacesTableViewController {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             StorageManager.shared.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -94,14 +91,15 @@ extension PlacesTableViewController {
         targetVieController.editedPlace = place
     }
     
-    @IBAction func unwind( _ seg: UIStoryboardSegue) {}
+    @IBAction func unwind( _ seg: UIStoryboardSegue) {
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UISearchResultsUpdating
 extension PlacesTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-
         let searchText = searchController.searchBar.text ?? ""
         
         filteredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
@@ -112,10 +110,6 @@ extension PlacesTableViewController: UISearchResultsUpdating {
 
 // MARK: - Search
 extension PlacesTableViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        orderPlaces()
-    }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -177,36 +171,5 @@ extension PlacesTableViewController {
     private enum OrderBy: String {
         case date
         case name
-    }
-}
-
-// MARK: - Observing DB changes
-extension PlacesTableViewController {
-
-    private func setupDbChangesObserver() {
-        let notificationTokenPlaces = places.observe { changes in
-
-            guard !self.isFiltering else {
-                return
-            }
-
-            switch changes {
-            case .initial:
-                self.tableView.reloadData()
-
-            case .update(_, let deletions, let insertions, let modifications):
-                self.tableView.performBatchUpdates {
-                    // ! Always apply updates in the following order: deletions, insertions, then modifications.
-                    // Handling insertions before deletions may result in unexpected behavior.
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                }
-
-            case .error(let error):
-                print(error)
-            }
-        }
-        notificationTokens.append(notificationTokenPlaces)
     }
 }
