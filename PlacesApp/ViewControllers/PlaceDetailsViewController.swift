@@ -164,14 +164,14 @@ extension PlaceDetailsViewController {
         let camera = UIAlertAction(title: "Сделать фото", style: .default) { _ in
             self.chooseImagePicker(source: .camera)
         }
-        camera.setValue(UIImage(named: "camera"), forKey: "image")
+        camera.setValue(UIImage(systemName: "camera"), forKey: "image")
         
         let photo = UIAlertAction(title: "Выбрать фото", style: .default) { _ in
             self.chooseImagePicker(source: .photoLibrary)
         }
-        photo.setValue(UIImage(named: "photo"), forKey: "image")
+        photo.setValue(UIImage(systemName: "photo"), forKey: "image")
         
-        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel)
         
         actionSheet.addAction(camera)
         actionSheet.addAction(photo)

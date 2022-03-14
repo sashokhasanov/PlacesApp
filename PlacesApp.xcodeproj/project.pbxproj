@@ -134,15 +134,15 @@
 		2DAB3F6C27C909B100CAD4E2 /* PlacesApp */ = {
 			isa = PBXGroup;
 			children = (
-				2D1E725427DF77E500C51F99 /* Support files */,
+				2DAEEA4127DF74B500379F87 /* Storyboards */,
+				2D1E724E27DF769D00C51F99 /* ViewControllers */,
+				2D1E725027DF76CF00C51F99 /* Views */,
+				2DAEEA4227DF74E800379F87 /* Extensions */,
+				2DAEEA4327DF751100379F87 /* Helpers */,
+				2D1E724F27DF76C200C51F99 /* Models */,
 				2D1E725327DF77C900C51F99 /* Startup */,
 				2D1E725227DF77BC00C51F99 /* Resources */,
-				2D1E725027DF76CF00C51F99 /* Views */,
-				2D1E724F27DF76C200C51F99 /* Models */,
-				2D1E724E27DF769D00C51F99 /* ViewControllers */,
-				2DAEEA4327DF751100379F87 /* Helpers */,
-				2DAEEA4227DF74E800379F87 /* Extensions */,
-				2DAEEA4127DF74B500379F87 /* Storyboards */,
+				2D1E725427DF77E500C51F99 /* Support files */,
 			);
 			path = PlacesApp;
 			sourceTree = "<group>";
@@ -474,8 +474,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PlacesApp/Support files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Разрешите приложению доступ к камере, чтобы добавлять фотографии мест";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешите приложению доступ к геолокации, чтобы строить маршруты и отображать Ваше местоположение на карте";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -508,8 +508,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PlacesApp/Support files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyPlaces;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) photo use";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow location usage to make directions to favourite places";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Разрешите приложению доступ к камере, чтобы добавлять фотографии мест";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешите приложению доступ к геолокации, чтобы строить маршруты и отображать Ваше местоположение на карте";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
