@@ -129,7 +129,7 @@ extension MapViewController: MKMapViewDelegate {
         let center = mapManager.getCenterLocation(for: mapView)
         
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(center) { placemarks, error in
+        geocoder.reverseGeocodeLocation(center, preferredLocale: Locale(identifier: "ru_RU")) { placemarks, error in
             if let error = error {
                 print(error)
                 return
@@ -140,17 +140,10 @@ extension MapViewController: MKMapViewDelegate {
             }
             
             let placemark = placemarks.first
-            let streetName = placemark?.thoroughfare
-            let buildingNumber = placemark?.subThoroughfare
-            
+            let address = [placemark?.thoroughfare, placemark?.subThoroughfare, placemark?.locality, placemark?.country].compactMap { $0 }.joined(separator: ", ")
+
             DispatchQueue.main.async {
-                if streetName != nil && buildingNumber != nil {
-                    self.addressLabel.text = "\(streetName!), \(buildingNumber!)"
-                } else if streetName != nil {
-                    self.addressLabel.text = "\(streetName!)"
-                } else {
-                    self.addressLabel.text = ""
-                }
+                self.addressLabel.text = address
             }
         }
     }

@@ -65,7 +65,7 @@ extension PlacesTableViewController {
         
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { _, _, _ in
             StorageManager.shared.deleteObject(place)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -120,7 +120,7 @@ extension PlacesTableViewController: UISearchBarDelegate {
         searchController.obscuresBackgroundDuringPresentation = false
         
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Enter place name or location"
+        searchController.searchBar.placeholder = "Введите название или адрес"
 
         navigationItem.searchController = searchController
         definesPresentationContext = true
@@ -132,13 +132,13 @@ extension PlacesTableViewController {
     
     private func setupOrderItem() {
         
-        let byDate = UIAction(title: "By date", identifier: UIAction.Identifier(OrderBy.date.rawValue), state: .on) { _ in
+        let byDate = UIAction(title: "По дате", identifier: UIAction.Identifier(OrderBy.date.rawValue), state: .on) { _ in
             self.orderBy = .date
             self.updateState(for: self.sortButtonItem.menu)
             self.orderPlaces()
         }
         
-        let byName = UIAction(title: "By name", identifier: UIAction.Identifier(OrderBy.name.rawValue), state: .off) { _ in
+        let byName = UIAction(title: "По имени", identifier: UIAction.Identifier(OrderBy.name.rawValue), state: .off) { _ in
             self.orderBy = .name
             self.updateState(for: self.sortButtonItem.menu)
             self.orderPlaces()

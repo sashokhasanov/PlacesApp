@@ -111,7 +111,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My places" largeTitleDisplayMode="never" id="f5R-qM-GSp">
-                        <barButtonItem key="leftBarButtonItem" title="Sort" id="cNj-fB-ZwB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Сортировка" id="cNj-fB-ZwB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xef-5a-Dl6">
                             <connections>
                                 <segue destination="JGx-Xc-ZT2" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="jXe-3c-Nvf"/>
@@ -182,13 +182,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-BJ-ze1">
                                                     <rect key="frame" x="20" y="15" width="374" height="55.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeH-ys-Iek">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeH-ys-Iek">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Place name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K18-9c-TlT">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Название" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K18-9c-TlT">
                                                             <rect key="frame" x="0.0" y="34" width="374" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -217,13 +217,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZEy-zh-b03">
                                                     <rect key="frame" x="20" y="15" width="342" height="55.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-yo-5RQ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адрес" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-yo-5RQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="342" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Place location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LmQ-Lt-gaK">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Адрес" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LmQ-Lt-gaK">
                                                             <rect key="frame" x="0.0" y="34" width="342" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -268,13 +268,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oes-Fm-hBb">
                                                     <rect key="frame" x="20" y="15" width="374" height="55.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiF-B7-Ezh">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Тип" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiF-B7-Ezh">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Place type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NpO-W7-Kpn">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Тип" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NpO-W7-Kpn">
                                                             <rect key="frame" x="0.0" y="34" width="374" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -340,12 +340,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New place" largeTitleDisplayMode="always" id="7KO-RX-tql">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aYR-BT-U7I">
+                        <barButtonItem key="leftBarButtonItem" title="Отменить" id="aYR-BT-U7I">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="PXK-gq-ncq" id="xEQ-OJ-iM0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="Ayn-Ev-dpl">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Сохранить" id="Ayn-Ev-dpl">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="PXK-gq-ncq" id="ht5-6P-SKp"/>
                             </connections>
@@ -458,10 +458,10 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-JH-xrS">
-                                <rect key="frame" x="102" y="772" width="210" height="50"/>
+                                <rect key="frame" x="106.5" y="772" width="201" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="car.fill" catalog="system" title="Build route" imagePadding="9" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="plain" image="car.fill" catalog="system" title="Маршрут" imagePadding="9" titleAlignment="center">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                     <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
                                     <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -500,10 +500,10 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygc-1s-Iwb">
-                                <rect key="frame" x="103" y="772" width="208" height="50"/>
+                                <rect key="frame" x="107" y="772" width="200.5" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system" title="Clear route" imagePadding="9" titleAlignment="center">
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system" title="Сбросить" imagePadding="9" titleAlignment="center">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
                                     <directionalEdgeInsets key="contentInsets" top="10" leading="30" bottom="10" trailing="30"/>
                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -602,7 +602,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="KAf-oU-ose"/>
-        <segue reference="5io-eY-ost"/>
+        <segue reference="uV2-1Q-2hz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>
